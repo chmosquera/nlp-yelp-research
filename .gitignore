@@ -1,2 +1,4 @@
-yelp-dataset/yelp_academic*
+yelp-dataset/yelp_academic
 yelp-dataset/yelp_review.csv
+
+.idea/*
