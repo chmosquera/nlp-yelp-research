@@ -82,6 +82,9 @@ data_words = list(sent_to_words(sentences))
 bigram = gensim.models.Phrases(data_words, min_count=5, threshold=100)
 bigram_mod = gensim.models.phrases.Phraser(bigram)
 
+## Save / load an exported collocation model.
+bigram_mod.save("./models/my_bigram_model.pkl")
+
 ##
 data_words_nostops = remove_stopwords(data_words)
 data_words_bigrams = make_bigrams(data_words_nostops)
