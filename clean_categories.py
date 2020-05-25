@@ -1,3 +1,4 @@
+#Don't need these anymore
 import pandas as pd
 
 df_business = pd.read_csv('yelp-dataset/yelp_business.csv')
