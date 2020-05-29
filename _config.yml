@@ -1,9 +1,9 @@
 ---
 project:
-  name: programming pages
-  owner: pixeldroid
-  repo: https://github.com/pixeldroid/programming-pages
-  version: 0.5.22
+  name: nltk-yelp-research
+  owner: chmosquera
+  repo: https://github.com/chmosquera/nltk-yelp-research
+  version: 0.1
 collections:
   guides:
     output: true
