@@ -30,7 +30,7 @@ title: Your awesome title
 # github_username:  jekyll
 
 # Build settings
-theme: programming-pages
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
