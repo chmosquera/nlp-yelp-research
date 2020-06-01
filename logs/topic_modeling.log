@@ -1,0 +1,19 @@
+
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-01_41.csv
+Model path: ./models/my_lda_model-01_06_2020-01_41.pkl
+Perplexity: -5.36716220497885
+chunksize: 10
+num_topics: 5
+passes: 10
+===========================================================
+0: 
+0.048*"order" + 0.032*"place" + 0.032*"come" + 0.025*"love" + 0.025*"burger" + 0.017*"adjustment" + 0.017*"friend" + 0.017*"little guy" + 0.017*"store" + 0.017*"problem": 
+1: 
+0.006*"time" + 0.006*"restaurant" + 0.006*"beef" + 0.006*"try" + 0.006*"cuon" + 0.006*"pricing" + 0.006*"test" + 0.006*"phos" + 0.006*"order" + 0.006*"gravy": 
+2: 
+0.006*"fun" + 0.005*"blast" + 0.005*"Would" + 0.005*"plain" + 0.005*"bike" + 0.005*"cycle" + 0.005*"strip" + 0.005*"look" + 0.005*"group" + 0.005*"bar": 
+3: 
+0.034*"beef" + 0.034*"restaurant" + 0.026*"time" + 0.018*"place" + 0.018*"start" + 0.018*"thing" + 0.018*"disappoint" + 0.018*"street" + 0.018*"vermicelli" + 0.018*"neighbourhood": 
+4: 
+0.034*"coffee" + 0.034*"fun" + 0.027*"meat" + 0.021*"look" + 0.014*"seat" + 0.014*"place" + 0.014*"order" + 0.014*"try" + 0.014*"ice" + 0.014*"house": 

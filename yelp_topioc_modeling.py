@@ -14,6 +14,7 @@ from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
 from gensim.models.phrases import Phrases, Phraser
 from gensim.models.ldamodel import LdaModel
+from apyori import apriori
 
 
 def loadData():
@@ -53,6 +54,16 @@ def getPOS(tokenized):
 #This removes all the stop words, and actually also punctuation and non-alphabetic words, and makes all lower case
 #you can edit your own version
 def filterTokens(tokenized):
+    start = time.time()
+    filtered = []
+    for token in tokenized:
+        if token.isalpha() and token.lower() not in stopwords.words('english'):
+            filtered.append(token.lower())  # deacc=True removes punctuations
+    end = time.time()
+    print("Time elapsed: ", end - start)
+    return filtered
+
+def filterTokensAll(tokenized):
   return [token.lower() for token in tokenized if token.isalpha() and token.lower() not in stopwords.words('english')]
 
 #Using the NLTK stemmer
@@ -103,9 +114,9 @@ def make_bigrams(texts):
 
 def regexChunker(sentence):
     grammar = r"""
-      NP: {<DT>?<JJ>*<NN>}          # Chunk sequences of DT, JJ, NN
+      NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
       PP: {<IN><NP>}               # Chunk prepositions followed by NP
-      VP: {<VB.*><NP|PP|CLAUSE>} # Chunk verbs and their arguments
+      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP|CLAUSE>} # Chunk verbs and their arguments
       CLAUSE: {<NP><VP>}           # Chunk NP, VP
       """
     chunked = nltk.RegexpParser(grammar)
@@ -119,9 +130,9 @@ def extractPhrases(lemmatized):
     tree = regexChunker(tagged)
     phrases = []
     for subtree in tree.subtrees():
-        if subtree.label() in ["NP", "PP", "VP", "CLAUSE"]:
+        if subtree.label() in ["NP", "PP", "VP", "CLAUSE", "NOUN"]:
             p = " ".join([tag[0] for tag in subtree.leaves()])
-            print(p)
+            print(p, subtree.label())
             phrases.append((p,subtree.label()))
     return phrases
 
@@ -130,14 +141,51 @@ def extractPhrasesAll(lemmatized_text):
     start = time.time()
     phrases = []
     for lemmatized in lemmatized_text:
-        phrases.append(extractPhrases(lemmatized))
+        np = extractPhrases(lemmatized)
+        print("np: ", np)
+        n = extractNouns(lemmatized)
+        print("n: ", n)
+        nnp = []
+        nnp.extend(np)
+        nnp.extend(n)
+        phrases.append(nnp)
     end = time.time()
+
+    # Also get single nouns
     print("     Time elapsed: ", end - start)
     return phrases
 
 
+def extractNouns(lemmatized):
+    NOUNS = ["NN","NNS","NNP","NNPS"]
+    text = " ".join(lemmatized)
+    tagged = nltk.pos_tag(nltk.word_tokenize(text))
+    entities = []
+    for word,tag in tagged:
+        if tag in NOUNS:
+            entities.append((word,tag))
+    return entities
+
 def loadBigramModel():
     bigram_model = Phraser.load(BIGRAM_MODEL_PATH)
+
+def log(dt_string, model, corpus):
+    f = open("logs\\topic_modeling.log", 'a+')
+    f.write("\n===========================================================")
+    f.write("\nData path: " + PICKLE_PATH + DF_NAME + dt_string + ".csv")
+    f.write("\nModel path: " + LDA_MODEL_PATH + "my_lda_model" + dt_string + ".pkl")
+    f.write('\nPerplexity: ' + str(model.log_perplexity(corpus)))  # a measure of how good the model is. lower the better.
+    f.write("\nchunksize: " + str(model.chunksize))
+    f.write("\nnum_topics: " + str(model.num_topics))
+    f.write("\npasses: " + str(model.passes))
+    f.write("\n===========================================================")
+    topics = model.print_topics()
+    for topic in topics:
+        f.write("\n" + str(topic[0]) + ": ")
+        f.write("\n" + str(topic[1]) + ": ")
+    # f.write(str(model.print_topics()))
+    f.close()
+
 
 ## Do this the first time when you don't have any models
 def buildModels():
@@ -147,7 +195,7 @@ def buildModels():
 
     loadData() # _df
     # Data Example
-    sample = _df.iloc[10]['text']
+    sample = _df.iloc[100]['text']
     print("original: ", sample)
     tokenized = tokenize(sample)
     print("tokenized: ", tokenized)
@@ -161,9 +209,6 @@ def buildModels():
     phrase_pairs = extractPhrasesAll(lemmatized)
 
     phrases = [[phrase for phrase,label in pair] for pair in phrase_pairs]
-    # for pair in phrase_pairs:
-    #     for phrase,label in pair:
-    #         phrases.append(phrase)
 
     # Save cleaned texts
     data = {'text': samples,
@@ -172,6 +217,7 @@ def buildModels():
             'phrase_pairs': phrase_pairs}
     df_preprocessed = pd.DataFrame(data, columns=data.keys())
     df_preprocessed.to_pickle(PICKLE_PATH + DF_NAME + dt_string + ".pkl")
+    df_preprocessed.to_csv(PICKLE_PATH + DF_NAME + dt_string + ".csv")
 
 
     id2word = corpora.Dictionary(phrases)
@@ -184,10 +230,10 @@ def buildModels():
     start = time.time()
     lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
                                                id2word=id2word,
-                                               num_topics=20,
+                                               num_topics=5,
                                                random_state=100,
                                                update_every=1,
-                                               chunksize=100,
+                                               chunksize=10,
                                                passes=10,
                                                alpha='auto',
                                                per_word_topics=True)
@@ -197,11 +243,18 @@ def buildModels():
     # Save the LDA model. Using very specific name so I can save all models
     lda_model.save(LDA_MODEL_PATH + "my_lda_model" + dt_string + ".pkl")
 
-    ## Example This predicts the topics for a review
-    # predicted = lda_model[corpus[:5]]
-    # for (topic_id, topic_score) in predicted[0][0]:
-    #     print(topic_id, ". ", topic_score, " : ", lda_model.show_topic(topic_id))
-    #
+    pprint(lda_model.print_topics())
+    print('\nPerplexity: ', lda_model.log_perplexity(corpus))  # a measure of how good the model is. lower the better.
+
+    # Log information so I can refer back to it later.
+    log(dt_string, lda_model, corpus)
+
+    # This is taking tooooooo long to do just 10 rows
+    # # Build apriori
+    # association_rules = apriori(phrases, min_support=0.0045, min_confidence=0.2, min_lift=3, min_length=2)
+    # association_results = list(association_rules)
+
+
 
 # TRIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
 BIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
@@ -214,4 +267,4 @@ if __name__ == "__main__":
     bigram_model = None
 
 
-# buildModels()
+buildModels()
