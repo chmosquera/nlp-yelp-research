@@ -1,9 +1,6 @@
 
 ## Imports
-import nltk
-import spacy
-# Run in terminal or command prompt
-spacy.load("en")
+import nltk, spacy, pickle, time
 from nltk.corpus import stopwords
 import re
 import numpy as np
@@ -14,12 +11,14 @@ import gensim
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
+from gensim.models.phrases import Phrases, Phraser
 
-
-## Import Dataset
-df = pd.read_csv('yelp-dataset/yelp_25k.csv')
-print(df.head())
-
+def loadData():
+    global _df
+    ## Import Dataset
+    _df = pd.read_csv('yelp-dataset/yelp_25k.csv')
+    print(_df.head())
+    return _df
 
 
 ## Preprocessing text
@@ -45,6 +44,13 @@ def filterTokens(tokenized):
 def stemming(tokenized):
   return [stemmer.stem(token) for token in tokenized]
 
+def clean(sentences):
+    start = time.time()
+    for sentence in sentences:
+        yield(filterTokens(myTokenizer(str(sentence))))  # deacc=True removes punctuations
+    end = time.time()
+    print("Time elapsed: ", end - start)
+
 def sent_to_words(sentences):
     for sentence in sentences:
         yield(gensim.utils.simple_preprocess(str(sentence), deacc=True))  # deacc=True removes punctuations
@@ -59,57 +65,81 @@ def lemmatization(texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
 
 # Define functions for stopwords, bigrams, trigrams and lemmatization
 def remove_stopwords(texts):
-    return [[word for word in gensim.utils.simple_preprocess(str(doc)) if word not in stopwords.words('english')] for doc in texts]
+    start = time.time()
+    result = [[word for word in gensim.utils.simple_preprocess(str(doc)) if word not in stopwords.words('english')] for doc in texts]
+    end = time.time()
+    print("Time elapsed: ", end - start)
+    return result
 
 def make_bigrams(texts):
-    return [bigram_mod[doc] for doc in texts]
-
-##EXAMPLE
-sample = df.iloc[10]['text']
-print("original: ", sample)
-tokenized = myTokenizer(sample)
-print("tokenized: ", tokenized)
-filtered = filterTokens(tokenized)
-print("filtered: ", filtered)
+    start = time.time()
+    bigrams = [bigram_model[doc] for doc in texts]
+    end = time.time()
+    print("Time elapsed: ", end - start)
+    return bigrams
 
 
-## Tokenize words and clean-up text
-sentences = df.text
-# data_words = df['text'].apply(clean_text)
-data_words = list(sent_to_words(sentences))
+def loadBigramModel():
+    bigram_model = Phraser.load(BIGRAM_MODEL_PATH)
 
-## Build bigram and trigram models
-bigram = gensim.models.Phrases(data_words, min_count=5, threshold=100)
-bigram_mod = gensim.models.phrases.Phraser(bigram)
+# Do this the first time when you don't have any models
+def buildModels():
+    loadData() # _df
+    # Data Example
+    sample = _df.iloc[10]['text']
+    print("original: ", sample)
+    tokenized = myTokenizer(sample)
+    print("tokenized: ", tokenized)
+    filtered = filterTokens(tokenized)
+    print("filtered: ", filtered)
 
-## Save / load an exported collocation model.
-bigram_mod.save("./models/my_bigram_model.pkl")
+    # Tokenize words and clean-up text
+    sentences = _df.text
+    data_words = list(clean(sentences))
 
-##
-data_words_nostops = remove_stopwords(data_words)
-data_words_bigrams = make_bigrams(data_words_nostops)
-# data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
-data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'VERB', 'PNOUN'])
+    # ## Build bigram and trigram models
+    # bigram = gensim.models.Phrases(data_words, min_count=5, threshold=100)
+    # bigram_mod = gensim.models.phrases.Phraser(bigram)
+    #
+    # # Save / load an exported collocation model.
+    # bigram_mod.save(BIGRAM_MODEL_PATH)
 
-## Create dictionary and corpus needed for topic modeling
-# Create Dictionary
-id2word = corpora.Dictionary(data_lemmatized)
+    ##
+    data_words_nostops = remove_stopwords(data_words)
+    # data_words_bigrams = make_bigrams(data_words_nostops)
+    # data_lemmatized = lemmatization(data_words_bigrams, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV'])
+    data_lemmatized = lemmatization(data_words_nostops, allowed_postags=['NOUN', 'VERB', 'PNOUN'])
 
-# Term Document Frequency
-corpus = [id2word.doc2bow(text) for text in data_lemmatized]      # token2id : token -> tokenid; id2token : reverse mapping of token2id; doc2bow : convert doc to bag of words
+    ## Create dictionary and corpus needed for topic modeling
+    # Create Dictionary
+    id2word = corpora.Dictionary(data_lemmatized)
 
-## Build LDA model
-lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-                                           id2word=id2word,
-                                           num_topics=20,
-                                           random_state=100,
-                                           update_every=1,
-                                           chunksize=100,
-                                           passes=10,
-                                           alpha='auto',
-                                           per_word_topics=True)
+    # Term Document Frequency
+    corpus = [id2word.doc2bow(text) for text in data_lemmatized]      # token2id : token -> tokenid; id2token : reverse mapping of token2id; doc2bow : convert doc to bag of words
 
-## Example This predicts the topics for a review
-predicted = lda_model[corpus[:5]]
-for (topic_id, topic_score) in predicted[0][0]:
-    print(topic_id, ". ", topic_score, " : ", lda_model.show_topic(topic_id))
+    ## Build LDA model
+    lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                               id2word=id2word,
+                                               num_topics=20,
+                                               random_state=100,
+                                               update_every=1,
+                                               chunksize=100,
+                                               passes=10,
+                                               alpha='auto',
+                                               per_word_topics=True)
+
+    lda_model.save(LDA_MODEL_PATH)
+
+    ## Example This predicts the topics for a review
+    predicted = lda_model[corpus[:5]]
+    for (topic_id, topic_score) in predicted[0][0]:
+        print(topic_id, ". ", topic_score, " : ", lda_model.show_topic(topic_id))
+
+
+# TRIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
+BIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
+LDA_MODEL_PATH = "./models/my_lda_model.pkl"
+if __name__ == "__main__":
+    _df = None
+    trigram_model = None
+    bigram_model = None
