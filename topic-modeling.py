@@ -15,6 +15,7 @@ import gensim
 import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 from gensim.models import CoherenceModel
+from gensim.models.ldamodel import LdaModel
 
 ## Plotting tools
 # import pyLDAvis
@@ -124,15 +125,15 @@ def buildLDAModel():
     print([[(id2word[id], freq) for id, freq in cp] for cp in corpus[:1]])
 
     ## Build LDA model
-    lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-                                               id2word=id2word,
-                                               num_topics=20,
-                                               random_state=100,
-                                               update_every=1,
-                                               chunksize=100,
-                                               passes=10,
-                                               alpha='auto',
-                                               per_word_topics=True)
+    lda_model = LdaModel(corpus=corpus,
+                           id2word=id2word,
+                           num_topics=20,
+                           random_state=100,
+                           update_every=1,
+                           chunksize=100,
+                           passes=10,
+                           alpha='auto',
+                           per_word_topics=True)
 
 
     ## Print the Keyword in the 10 topics
@@ -152,6 +153,7 @@ def main():
 
 
 if __name__ == "__main__":
+    picklePath = "pickles\\"
     trigram_mod = None
     bigram_mod = None
     data = None
