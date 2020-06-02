@@ -1,1 +1,1 @@
-food,nutrient,solid_food,food,food,
+food,nutrient,beverage.n.01,food,solid_food,baked_goods,breakfast_food,butter,cheese,chocolate,coconut,convenience_food,dika_bread,fish,fresh_food,health_food,junk_food,leftovers,loaf,meat,pasta,produce,seafood,slop,yogurt,
