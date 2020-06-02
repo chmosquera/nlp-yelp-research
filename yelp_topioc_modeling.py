@@ -17,16 +17,19 @@ from gensim.models.ldamodel import LdaModel
 from apyori import apriori
 
 
-def loadData():
+def loadData(fileName = None):
     global _df
-    ## Import Dataset
-    _df = pd.read_csv('yelp-dataset/' + DF_NAME + '.csv')
+    ## Import Dataset, restaurants only
+    if fileName is None:
+        fileName = 'yelp-dataset/' + DF_NAME + '.csv'
+
+    _df = pd.read_csv(fileName)
+    restaurants = _df[_df['categories'].str.contains("Restaurants")]
+    foods = _df[_df['categories'].str.contains("Food")]
+    _df = pd.concat([restaurants, foods])
     print(_df.head())
 
-    #TEMP USE A SMALLER SAMPLE
-    _df = _df[:1000]
     return _df
-
 
 ## Preprocessing text
 stemmer = nltk.stem.porter.PorterStemmer() #NLTK's built-in stemmer resource
@@ -116,8 +119,8 @@ def regexChunker(sentence):
     grammar = r"""
       NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
       PP: {<IN><NP>}               # Chunk prepositions followed by NP
-      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP|CLAUSE>} # Chunk verbs and their arguments
-      CLAUSE: {<NP><VP>}           # Chunk NP, VP
+      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP>} # Chunk verbs and their arguments
+      # CLAUSE: {<NP><VP>}           # Chunk NP, VP
       """
     chunked = nltk.RegexpParser(grammar)
     return chunked.parse(sentence)
@@ -132,7 +135,7 @@ def extractPhrases(lemmatized):
     for subtree in tree.subtrees():
         if subtree.label() in ["NP", "PP", "VP", "CLAUSE", "NOUN"]:
             p = " ".join([tag[0] for tag in subtree.leaves()])
-            print(p, subtree.label())
+            # print(p, subtree.label())
             phrases.append((p,subtree.label()))
     return phrases
 
@@ -142,9 +145,9 @@ def extractPhrasesAll(lemmatized_text):
     phrases = []
     for lemmatized in lemmatized_text:
         np = extractPhrases(lemmatized)
-        print("np: ", np)
+        # print("np: ", np)
         n = extractNouns(lemmatized)
-        print("n: ", n)
+        # print("n: ", n)
         nnp = []
         nnp.extend(np)
         nnp.extend(n)
@@ -169,15 +172,19 @@ def extractNouns(lemmatized):
 def loadBigramModel():
     bigram_model = Phraser.load(BIGRAM_MODEL_PATH)
 
-def log(dt_string, model, corpus):
+def log(samples, dt_string, model, corpus, elapsed_time):
     f = open("logs\\topic_modeling.log", 'a+')
     f.write("\n===========================================================")
+    # f.write("\n* No noun phrases, just nouns")
     f.write("\nData path: " + PICKLE_PATH + DF_NAME + dt_string + ".csv")
+    f.write("\nnum_rows: " + str(len(samples)))
     f.write("\nModel path: " + LDA_MODEL_PATH + "my_lda_model" + dt_string + ".pkl")
     f.write('\nPerplexity: ' + str(model.log_perplexity(corpus)))  # a measure of how good the model is. lower the better.
     f.write("\nchunksize: " + str(model.chunksize))
     f.write("\nnum_topics: " + str(model.num_topics))
     f.write("\npasses: " + str(model.passes))
+    f.write("\niterations: " + str(model.iterations))
+    f.write("\nelapsed time: " + str(elapsed_time))
     f.write("\n===========================================================")
     topics = model.print_topics()
     for topic in topics:
@@ -188,30 +195,32 @@ def log(dt_string, model, corpus):
 
 
 ## Do this the first time when you don't have any models
-def buildModels():
+def buildModels(log_info = True):
     # capture date/time, use for naming later
     now = datetime.now()
     dt_string = now.strftime("-%d_%m_%Y-%H_%M")
 
     loadData() # _df
-    # Data Example
-    sample = _df.iloc[100]['text']
-    print("original: ", sample)
-    tokenized = tokenize(sample)
-    print("tokenized: ", tokenized)
-    filtered = filterTokens(tokenized)
-    print("filtered: ", filtered)
+    # # Data Example
+    # sample = _df.iloc[100]['text']
+    # print("original: ", sample)
+    # tokenized = tokenize(sample)
+    # print("tokenized: ", tokenized)
+    # filtered = filterTokens(tokenized)
+    # print("filtered: ", filtered)
 
     # Tokenize words and clean-up text
-    samples = _df.text[:10]
+    samples = _df.text
+    business_ids = _df.business_id
     tokenized = tokenizeAll(samples)
     lemmatized = lemmatizeAll(tokenized)
     phrase_pairs = extractPhrasesAll(lemmatized)
 
-    phrases = [[phrase for phrase,label in pair] for pair in phrase_pairs]
+    phrases = [[phrase.lower() for phrase,label in pair] for pair in phrase_pairs]
 
     # Save cleaned texts
-    data = {'text': samples,
+    data = {'business_id': business_ids,
+            'text': samples,
             'tokens': tokenized,
             'lemma': lemmatized,
             'phrase_pairs': phrase_pairs}
@@ -227,16 +236,19 @@ def buildModels():
 
     ## Build LDA model
     print("Building model...")
+    num_topics = []
     start = time.time()
     lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-                                               id2word=id2word,
-                                               num_topics=5,
-                                               random_state=100,
-                                               update_every=1,
-                                               chunksize=10,
-                                               passes=10,
-                                               alpha='auto',
-                                               per_word_topics=True)
+                                                id2word=id2word,
+                                                num_topics=25,
+                                                random_state=100,
+                                                update_every=1,
+                                                chunksize=1000,
+                                                passes=20,
+                                                iterations=500,
+                                                alpha='auto',
+                                                eval_every=None,
+                                                per_word_topics=True)
     end = time.time()
     print("     Time elapsed: ", end-start)
 
@@ -247,7 +259,8 @@ def buildModels():
     print('\nPerplexity: ', lda_model.log_perplexity(corpus))  # a measure of how good the model is. lower the better.
 
     # Log information so I can refer back to it later.
-    log(dt_string, lda_model, corpus)
+    if log_info:
+        log(samples, dt_string, lda_model, corpus, end-start)
 
     # This is taking tooooooo long to do just 10 rows
     # # Build apriori
@@ -255,6 +268,86 @@ def buildModels():
     # association_results = list(association_rules)
 
 
+def buidModelOnly():
+
+    # load data
+    loadData()
+
+
+def format_topics_sentences(ldamodel, corpus, texts):
+    # Init output
+    sent_topics_df = pd.DataFrame()
+
+    # Get main topic in each document
+    for i, row in enumerate(ldamodel[corpus]):
+        row = sorted(row, key=lambda x: (x[1]), reverse=True)
+        # Get the Dominant topic, Perc Contribution and Keywords for each document
+        for j, (topic_num, prop_topic) in enumerate(row):
+            if j == 0:  # => dominant topic
+                wp = ldamodel.show_topic(topic_num)
+                topic_keywords = ", ".join([word for word, prop in wp])
+                sent_topics_df = sent_topics_df.append(pd.Series([int(topic_num), round(prop_topic,4), topic_keywords]), ignore_index=True)
+            else:
+                break
+    sent_topics_df.columns = ['Dominant_Topic', 'Perc_Contribution', 'Topic_Keywords']
+
+    # Add original text to the end of the output
+    contents = pd.Series(texts)
+    sent_topics_df = pd.concat([sent_topics_df, contents], axis=1)
+    return(sent_topics_df)
+
+
+def applyLDAModel():
+
+    loadData() # _df
+
+    # Tokenize words and clean-up text
+    samples = _df.text
+    business_ids = _df.business_id
+    tokenized = tokenizeAll(samples)
+    lemmatized = lemmatizeAll(tokenized)
+    phrase_pairs = extractPhrasesAll(lemmatized)
+
+    phrases = [[phrase.lower() for phrase,label in pair] for pair in phrase_pairs]
+
+    id2word = corpora.Dictionary(phrases)
+    corpus = [id2word.doc2bow(text) for text in phrases]      # token2id : token -> tokenid; id2token : reverse mapping of token2id; doc2bow : convert doc to bag of words
+
+    df_topic_sents_keywords = format_topics_sentences(ldamodel=_lda_model, corpus=corpus, texts=samples)
+
+    # Format
+    df_dominant_topic = df_topic_sents_keywords.reset_index()
+    df_dominant_topic.columns = ['Document_No', 'Dominant_Topic', 'Topic_Perc_Contrib', 'Keywords', 'Text']
+
+    # Show
+    df_dominant_topic.head(10)
+    df_dominant_topic.to_csv("lda_results.csv")
+
+
+# def applyLDAModel():
+#     fileName = 'pickles/yelp_25k-01_06_2020-10_01.csv'
+#     data = pd.read_csv(fileName)
+#
+#     # Tokenize words and clean-up text
+#     samples = data.text
+#     tokenized = data.tokens
+#     lemmatized = data.lemma
+#     phrase_pairs = data.phrase_pairs
+#
+#     phrases = [[phrase.lower() for phrase,label in pair] for pair in phrase_pairs]
+#
+#     id2word = corpora.Dictionary(phrases)
+#     corpus = [id2word.doc2bow(text) for text in phrases]      # token2id : token -> tokenid; id2token : reverse mapping of token2id; doc2bow : convert doc to bag of words
+#
+#     df_topic_sents_keywords = format_topics_sentences(ldamodel=_lda_model, corpus=corpus, texts=samples)
+#
+#     # Format
+#     df_dominant_topic = df_topic_sents_keywords.reset_index()
+#     df_dominant_topic.columns = ['Document_No', 'Dominant_Topic', 'Topic_Perc_Contrib', 'Keywords', 'Text']
+#
+#     # Show
+#     df_dominant_topic.head(10)
+#     df_dominant_topic.to_csv("lda_results.csv")
 
 # TRIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
 BIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
@@ -265,6 +358,9 @@ PICKLE_PATH = "pickles\\"
 if __name__ == "__main__":
     _df = None
     bigram_model = None
+    _lda_model = LdaModel.load("./models/my_lda_model-01_06_2020-10_01.pkl")
 
 
-buildModels()
+# buildModels()
+
+applyLDAModel()

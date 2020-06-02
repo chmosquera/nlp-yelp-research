@@ -17,3 +17,612 @@ passes: 10
 0.034*"beef" + 0.034*"restaurant" + 0.026*"time" + 0.018*"place" + 0.018*"start" + 0.018*"thing" + 0.018*"disappoint" + 0.018*"street" + 0.018*"vermicelli" + 0.018*"neighbourhood": 
 4: 
 0.034*"coffee" + 0.034*"fun" + 0.027*"meat" + 0.021*"look" + 0.014*"seat" + 0.014*"place" + 0.014*"order" + 0.014*"try" + 0.014*"ice" + 0.014*"house": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-02_24.csv
+Model path: ./models/my_lda_model-01_06_2020-02_24.pkl
+Perplexity: -6.925929799528683
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+===========================================================
+11: 
+0.024*"tell" + 0.024*"customer" + 0.024*"try" + 0.024*"groupon" + 0.024*"use" + 0.012*"use recognize tell" + 0.012*"recognize tell" + 0.012*"place" + 0.012*"buy groupon" + 0.012*"friendly place": 
+17: 
+0.018*"beef" + 0.018*"restaurant" + 0.018*"menu" + 0.018*"metro" + 0.018*"pork" + 0.018*"change" + 0.018*"call" + 0.018*"reservation" + 0.018*"station" + 0.018*"seat": 
+5: 
+0.030*"platter" + 0.020*"person" + 0.020*"dark" + 0.020*"food" + 0.020*"know" + 0.020*"hide" + 0.020*"kind" + 0.010*"decoration" + 0.010*"light decoration" + 0.010*"community": 
+9: 
+0.029*"juice" + 0.020*"order" + 0.020*"bowl" + 0.020*"try" + 0.020*"street" + 0.020*"hour" + 0.020*"rice" + 0.020*"place" + 0.020*"coffee" + 0.020*"side": 
+0: 
+0.035*"order" + 0.018*"room" + 0.018*"temperature" + 0.018*"fryer" + 0.018*"plate" + 0.018*"share" + 0.018*"impress" + 0.018*"beer" + 0.018*"serve" + 0.018*"fry": 
+13: 
+0.043*"food" + 0.029*"top" + 0.029*"roll" + 0.022*"dragon" + 0.015*"taste" + 0.015*"sushi" + 0.015*"wedge" + 0.015*"night" + 0.015*"share" + 0.015*"slice": 
+8: 
+0.024*"staff" + 0.024*"water" + 0.018*"raman" + 0.018*"pork" + 0.018*"time" + 0.018*"place" + 0.012*"beware" + 0.012*"aftertaste" + 0.012*"gyoza" + 0.012*"boil": 
+2: 
+0.036*"furniture" + 0.031*"service" + 0.031*"guy" + 0.026*"delivery" + 0.021*"waste" + 0.021*"customer" + 0.021*"time" + 0.021*"purchase" + 0.010*"tell" + 0.010*"refund": 
+20: 
+0.065*"dog" + 0.026*"coffee" + 0.013*"guess" + 0.013*"food" + 0.013*"lounge" + 0.013*"tea" + 0.013*"purchase" + 0.013*"potato" + 0.013*"place" + 0.013*"walk": 
+23: 
+0.025*"place" + 0.020*"bar" + 0.020*"friend" + 0.020*"broccoli" + 0.015*"wait" + 0.015*"wind" + 0.015*"group" + 0.015*"sit" + 0.010*"interesting" + 0.010*"hype": 
+3: 
+0.032*"try" + 0.032*"Will" + 0.019*"order" + 0.019*"line" + 0.019*"pork" + 0.019*"buttermilk" + 0.014*"veggie" + 0.014*"soup" + 0.014*"noodle" + 0.009*"chicken": 
+6: 
+0.033*"place" + 0.022*"waffle" + 0.022*"decent" + 0.011*"phone" + 0.011*"countless" + 0.011*"response" + 0.011*"yelp" + 0.011*"use" + 0.011*"excellent" + 0.011*"creme": 
+18: 
+0.032*"pork" + 0.032*"try" + 0.022*"order" + 0.022*"ok" + 0.022*"Will" + 0.022*"work" + 0.022*"street" + 0.016*"time" + 0.011*"grill" + 0.011*"review": 
+22: 
+0.049*"burger" + 0.034*"food" + 0.025*"look" + 0.020*"place" + 0.020*"fruit" + 0.020*"veggie" + 0.015*"pub" + 0.015*"fry" + 0.015*"ok" + 0.010*"presentation": 
+19: 
+0.033*"food" + 0.027*"lunch" + 0.022*"meat" + 0.022*"selection" + 0.022*"lot" + 0.022*"hour" + 0.017*"dog" + 0.017*"place" + 0.011*"line" + 0.011*"love": 
+21: 
+0.014*"car" + 0.014*"vehicle" + 0.014*"fun" + 0.014*"purchase" + 0.011*"trade" + 0.011*"sell" + 0.011*"food" + 0.011*"service" + 0.011*"repair" + 0.011*"look": 
+4: 
+0.064*"order" + 0.032*"try" + 0.025*"roll" + 0.010*"marrow" + 0.010*"bone" + 0.010*"show" + 0.010*"time" + 0.010*"bacon" + 0.010*"griddle" + 0.010*"thing": 
+24: 
+0.029*"time" + 0.026*"sit" + 0.023*"croissant" + 0.016*"water" + 0.016*"almond" + 0.016*"try" + 0.013*"dog" + 0.013*"pool" + 0.013*"reservation" + 0.013*"make": 
+10: 
+0.059*"order" + 0.057*"place" + 0.016*"coffee" + 0.011*"food" + 0.009*"delivery" + 0.009*"look" + 0.009*"pho" + 0.009*"juice" + 0.009*"chicken" + 0.009*"flour": 
+16: 
+0.042*"place" + 0.037*"order" + 0.024*"food" + 0.016*"time" + 0.013*"option" + 0.012*"service" + 0.011*"friend" + 0.010*"item" + 0.010*"try" + 0.008*"soup": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-02_24.csv
+Model path: ./models/my_lda_model-01_06_2020-02_24.pkl
+Perplexity: -8.727660030556283
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+===========================================================
+1: 
+0.006*"cocktail" + 0.006*"try" + 0.005*"food" + 0.004*"m" + 0.004*"cookie" + 0.004*"kind" + 0.004*"manager" + 0.004*"way" + 0.004*"time" + 0.003*"work": 
+18: 
+0.008*"place" + 0.008*"time" + 0.005*"year" + 0.005*"service" + 0.005*"look" + 0.004*"dinner" + 0.004*"hour" + 0.003*"lot" + 0.003*"dog" + 0.003*"flavor": 
+11: 
+0.006*"check" + 0.005*"door" + 0.005*"food" + 0.005*"day" + 0.004*"casino" + 0.004*"option" + 0.004*"store" + 0.004*"garage" + 0.004*"price" + 0.004*"employee": 
+0: 
+0.014*"place" + 0.012*"dog" + 0.012*"truck" + 0.009*"day" + 0.007*"problem" + 0.007*"time" + 0.006*"wheel" + 0.006*"year" + 0.005*"fix" + 0.005*"door": 
+9: 
+0.019*"place" + 0.011*"food" + 0.010*"time" + 0.007*"bar" + 0.006*"home" + 0.006*"trail" + 0.005*"option" + 0.005*"taste" + 0.005*"way" + 0.004*"morning": 
+10: 
+0.011*"place" + 0.008*"work" + 0.006*"bar" + 0.006*"service" + 0.005*"order" + 0.005*"try" + 0.005*"menu" + 0.005*"friend" + 0.005*"burger" + 0.004*"use": 
+22: 
+0.011*"place" + 0.007*"food" + 0.007*"time" + 0.007*"price" + 0.007*"day" + 0.006*"order" + 0.006*"hour" + 0.005*"fact" + 0.005*"year" + 0.005*"lunch": 
+5: 
+0.012*"time" + 0.008*"place" + 0.007*"bar" + 0.007*"day" + 0.005*"service" + 0.005*"staff" + 0.005*"look" + 0.005*"thing" + 0.004*"eye" + 0.004*"home": 
+20: 
+0.018*"time" + 0.014*"food" + 0.012*"place" + 0.008*"beer" + 0.007*"visit" + 0.006*"work" + 0.005*"deal" + 0.005*"area" + 0.004*"lunch" + 0.004*"hour": 
+13: 
+0.014*"time" + 0.007*"price" + 0.006*"order" + 0.006*"shop" + 0.005*"night" + 0.005*"food" + 0.005*"way" + 0.005*"m" + 0.005*"place" + 0.004*"flavor": 
+2: 
+0.011*"place" + 0.011*"order" + 0.009*"menu" + 0.008*"time" + 0.007*"meal" + 0.006*"option" + 0.005*"walk" + 0.005*"price" + 0.005*"food" + 0.005*"day": 
+19: 
+0.013*"order" + 0.010*"time" + 0.010*"place" + 0.009*"food" + 0.006*"location" + 0.005*"lot" + 0.005*"friend" + 0.004*"look" + 0.004*"way" + 0.004*"dog": 
+24: 
+0.011*"time" + 0.011*"place" + 0.009*"day" + 0.007*"price" + 0.006*"food" + 0.006*"visit" + 0.006*"car" + 0.005*"try" + 0.005*"ask" + 0.005*"thing": 
+6: 
+0.015*"time" + 0.011*"place" + 0.008*"order" + 0.007*"room" + 0.006*"option" + 0.006*"day" + 0.006*"food" + 0.006*"way" + 0.005*"work" + 0.005*"bar": 
+7: 
+0.022*"order" + 0.019*"food" + 0.013*"time" + 0.009*"place" + 0.008*"service" + 0.005*"menu" + 0.005*"area" + 0.005*"salad" + 0.005*"m" + 0.005*"friend": 
+12: 
+0.021*"food" + 0.018*"place" + 0.008*"m" + 0.007*"time" + 0.007*"area" + 0.007*"year" + 0.006*"order" + 0.006*"service" + 0.005*"day" + 0.005*"lunch": 
+3: 
+0.017*"order" + 0.014*"place" + 0.009*"food" + 0.008*"time" + 0.008*"coffee" + 0.007*"thing" + 0.007*"staff" + 0.006*"way" + 0.005*"try" + 0.005*"night": 
+23: 
+0.026*"order" + 0.024*"place" + 0.011*"food" + 0.010*"time" + 0.006*"people" + 0.006*"service" + 0.005*"lot" + 0.004*"item" + 0.004*"day" + 0.004*"star": 
+8: 
+0.031*"place" + 0.015*"order" + 0.011*"time" + 0.011*"try" + 0.010*"food" + 0.010*"store" + 0.007*"bar" + 0.005*"roll" + 0.005*"work" + 0.005*"service": 
+21: 
+0.034*"food" + 0.026*"order" + 0.021*"place" + 0.017*"time" + 0.016*"service" + 0.007*"price" + 0.006*"try" + 0.005*"staff" + 0.005*"customer" + 0.004*"item": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-02_27.csv
+Model path: ./models/my_lda_model-01_06_2020-02_27.pkl
+Perplexity: -16.121365822770116
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+===========================================================
+0: 
+0.082*"dog" + 0.025*"concern" + 0.014*"bagel" + 0.012*"haircut" + 0.007*"safety" + 0.007*"take hour" + 0.006*"wipe" + 0.006*"operation" + 0.005*"speaker" + 0.004*"relationship": 
+3: 
+0.043*"massage" + 0.018*"trouble" + 0.011*"wing" + 0.009*"professional" + 0.008*"field" + 0.007*"tattoo" + 0.007*"instruction" + 0.006*"prawn" + 0.005*"battery" + 0.005*"toe": 
+7: 
+0.029*"client" + 0.016*"vacation" + 0.011*"great time" + 0.009*"handle" + 0.009*"suite" + 0.008*"pretzel" + 0.008*"tank" + 0.006*"success" + 0.006*"stair" + 0.005*"wet": 
+2: 
+0.056*"buffet" + 0.012*"pho" + 0.012*"begin" + 0.009*"cigarette" + 0.009*"auto" + 0.008*"blast" + 0.008*"y" + 0.007*"bf" + 0.006*"drinker" + 0.005*"shift": 
+9: 
+0.019*"dirty" + 0.019*"oyster" + 0.017*"crepe" + 0.013*"fly" + 0.011*"beat" + 0.010*"instructor" + 0.009*"tour" + 0.007*"gate" + 0.007*"spill" + 0.007*"receptionist": 
+1: 
+0.073*"die" + 0.039*"cookie" + 0.013*"plant" + 0.011*"lamb" + 0.009*"advise" + 0.008*"scratch" + 0.006*"champagne" + 0.006*"cappuccino" + 0.006*"thumb" + 0.005*"roof": 
+23: 
+0.038*"crab" + 0.014*"pedicure" + 0.013*"shell" + 0.011*"Could" + 0.009*"eyebrow" + 0.009*"manicure" + 0.009*"cucumber" + 0.007*"miso" + 0.006*"custom" + 0.006*"lime": 
+22: 
+0.039*"repair" + 0.025*"vehicle" + 0.020*"explain" + 0.015*"refuse" + 0.014*"pressure" + 0.013*"mother" + 0.013*"blood" + 0.013*"bike" + 0.010*"pocket" + 0.009*"warranty": 
+11: 
+0.031*"fix" + 0.028*"truck" + 0.024*"insurance" + 0.023*"airport" + 0.021*"facility" + 0.020*"tire" + 0.016*"response" + 0.014*"message" + 0.012*"dealer" + 0.012*"mail": 
+6: 
+0.017*"notch" + 0.016*"student" + 0.016*"rent" + 0.014*"policy" + 0.012*"apartment" + 0.012*"top notch" + 0.011*"program" + 0.011*"address" + 0.010*"condition" + 0.008*"cell": 
+17: 
+0.133*"pizza" + 0.029*"delivery" + 0.023*"crust" + 0.011*"deliver" + 0.009*"bake" + 0.007*"partner" + 0.007*"evening" + 0.007*"winter" + 0.006*"pan" + 0.006*"inconvenience": 
+24: 
+0.087*"cream" + 0.070*"ice" + 0.012*"salsa" + 0.012*"tortilla" + 0.009*"cupcake" + 0.008*"receipt" + 0.008*"vanilla" + 0.007*"brother" + 0.006*"crunch" + 0.006*"gelato": 
+12: 
+0.059*"man" + 0.047*"office" + 0.023*"member" + 0.018*"doctor" + 0.017*"online" + 0.017*"baby" + 0.011*"health" + 0.011*"tonight" + 0.010*"record" + 0.009*"mark": 
+14: 
+0.106*"beer" + 0.085*"selection" + 0.022*"fee" + 0.016*"host" + 0.013*"property" + 0.010*"craft" + 0.008*"balance" + 0.008*"meatball" + 0.008*"resort" + 0.008*"app": 
+19: 
+0.128*"bar" + 0.047*"music" + 0.036*"game" + 0.033*"play" + 0.025*"bartender" + 0.017*"ton" + 0.013*"venue" + 0.012*"design" + 0.011*"sport" + 0.010*"practice": 
+20: 
+0.044*"cook" + 0.039*"tea" + 0.020*"disappoint" + 0.019*"tender" + 0.018*"milk" + 0.017*"rib" + 0.016*"medium" + 0.015*"curry" + 0.012*"sugar" + 0.011*"sweet": 
+21: 
+0.042*"hair" + 0.030*"cut" + 0.022*"salon" + 0.019*"son" + 0.018*"nail" + 0.016*"recommend" + 0.015*"min" + 0.015*"coupon" + 0.011*"good service" + 0.011*"hostess": 
+15: 
+0.045*"coffee" + 0.022*"chocolate" + 0.018*"bowl" + 0.016*"chef" + 0.014*"drop" + 0.014*"pack" + 0.013*"cake" + 0.012*"sushi" + 0.012*"station" + 0.009*"detail": 
+10: 
+0.066*"food" + 0.048*"place" + 0.047*"order" + 0.018*"restaurant" + 0.017*"service" + 0.015*"eat" + 0.014*"taste" + 0.013*"menu" + 0.012*"try" + 0.010*"price": 
+4: 
+0.033*"time" + 0.021*"service" + 0.015*"place" + 0.014*"day" + 0.014*"staff" + 0.013*"work" + 0.011*"year" + 0.011*"room" + 0.010*"customer" + 0.010*"experience": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-09_29.csv
+Model path: ./models/my_lda_model-01_06_2020-09_29.pkl
+Perplexity: -15.634069983511374
+chunksize: 1000
+num_topics: 25
+passes: 10
+iterations: 10
+elapsed time: 151.05605053901672
+===========================================================
+1: 
+0.012*"live" + 0.008*"pas" + 0.008*"café" + 0.006*"dan" + 0.005*"classy" + 0.005*"suspect" + 0.003*"gin" + 0.003*"balcony" + 0.002*"bicycle" + 0.002*"rapide": 
+0: 
+0.027*"sale" + 0.010*"branch" + 0.008*"Wo" + 0.008*"cancel" + 0.007*"marrow" + 0.005*"tie" + 0.004*"polenta" + 0.004*"substance" + 0.003*"leur" + 0.003*"overcharge": 
+17: 
+0.012*"meatloaf" + 0.011*"code" + 0.011*"neighbourhood" + 0.010*"gyro" + 0.007*"everytime" + 0.007*"homeless" + 0.006*"tooth" + 0.004*"past" + 0.003*"past weekend" + 0.003*"renovation": 
+15: 
+0.017*"staple" + 0.017*"shake" + 0.016*"hamburger" + 0.009*"milkshake" + 0.006*"snob" + 0.005*"straw" + 0.005*"boot" + 0.004*"coma" + 0.004*"grace" + 0.003*"halfway": 
+5: 
+0.070*"mom" + 0.016*"matcha" + 0.009*"ravioli" + 0.009*"baguette" + 0.008*"addict" + 0.008*"gallon" + 0.006*"simplicity" + 0.006*"crush" + 0.005*"caffeine" + 0.004*"grapefruit": 
+4: 
+0.014*"feed" + 0.013*"pain" + 0.010*"rye" + 0.009*"control" + 0.008*"become" + 0.005*"wallet" + 0.005*"pickup" + 0.004*"diamond" + 0.004*"license" + 0.004*"bonne": 
+8: 
+0.055*"bagel" + 0.020*"travel" + 0.019*"scone" + 0.019*"cafe" + 0.013*"blueberry" + 0.011*"account" + 0.011*"wifi" + 0.008*"cooking" + 0.007*"rubbery" + 0.006*"rack": 
+2: 
+0.019*"pool" + 0.017*"train" + 0.012*"venue" + 0.008*"video" + 0.007*"lane" + 0.007*"mug" + 0.005*"voice" + 0.005*"flip" + 0.004*"shoe" + 0.004*"endure": 
+11: 
+0.035*"movie" + 0.035*"Ca" + 0.031*"casino" + 0.024*"biscuit" + 0.018*"hype" + 0.016*"valley" + 0.014*"theater" + 0.010*"fat" + 0.010*"vacation" + 0.008*"fool": 
+6: 
+0.211*"store" + 0.036*"grocery" + 0.024*"gelato" + 0.017*"shopping" + 0.014*"load" + 0.009*"farm" + 0.008*"beautiful" + 0.008*"bus" + 0.008*"tourist" + 0.007*"outlet": 
+19: 
+0.150*"bar" + 0.047*"music" + 0.037*"patio" + 0.034*"game" + 0.031*"watch" + 0.027*"play" + 0.025*"bartender" + 0.015*"tv" + 0.012*"chill" + 0.011*"ticket": 
+22: 
+0.195*"location" + 0.123*"pizza" + 0.035*"pie" + 0.025*"cupcake" + 0.023*"crust" + 0.013*"slice" + 0.010*"freeze" + 0.010*"cappuccino" + 0.009*"fire" + 0.009*"student": 
+16: 
+0.119*"tea" + 0.068*"chip" + 0.062*"milk" + 0.032*"taco" + 0.022*"snack" + 0.015*"strawberry" + 0.012*"cheesecake" + 0.012*"salsa" + 0.012*"tortilla" + 0.011*"boba": 
+7: 
+0.032*"dog" + 0.028*"floor" + 0.023*"daughter" + 0.022*"event" + 0.021*"book" + 0.018*"view" + 0.015*"design" + 0.013*"kinda" + 0.013*"amazing" + 0.013*"club": 
+9: 
+0.159*"coffee" + 0.071*"breakfast" + 0.069*"egg" + 0.037*"morning" + 0.037*"pastry" + 0.027*"latte" + 0.027*"die" + 0.020*"waffle" + 0.018*"brunch" + 0.016*"toast": 
+20: 
+0.115*"beer" + 0.096*"burger" + 0.094*"selection" + 0.088*"sandwich" + 0.013*"hotel" + 0.011*"craft" + 0.009*"environment" + 0.009*"mustard" + 0.008*"tap" + 0.008*"awesome": 
+13: 
+0.037*"chicken" + 0.033*"sauce" + 0.031*"meat" + 0.026*"fry" + 0.019*"beef" + 0.018*"rice" + 0.018*"flavor" + 0.017*"pork" + 0.016*"soup" + 0.015*"potato": 
+14: 
+0.147*"order" + 0.021*"line" + 0.016*"ask" + 0.016*"customer" + 0.015*"walk" + 0.014*"time" + 0.013*"guy" + 0.012*"drive" + 0.012*"call" + 0.012*"employee": 
+24: 
+0.104*"food" + 0.059*"service" + 0.027*"time" + 0.026*"restaurant" + 0.018*"experience" + 0.017*"night" + 0.016*"staff" + 0.015*"drink" + 0.015*"hour" + 0.014*"friend": 
+21: 
+0.080*"place" + 0.021*"price" + 0.021*"time" + 0.020*"try" + 0.018*"eat" + 0.016*"taste" + 0.016*"menu" + 0.015*"lot" + 0.015*"m" + 0.014*"thing": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-09_47.csv
+num_rows: 21827
+Model path: ./models/my_lda_model-01_06_2020-09_47.pkl
+Perplexity: -15.554964827394455
+chunksize: 1000
+num_topics: 25
+passes: 10
+iterations: 100
+elapsed time: 167.0662055015564
+===========================================================
+1: 
+0.006*"mission" + 0.006*"ideal" + 0.006*"trap" + 0.005*"classy" + 0.005*"connection" + 0.005*"internet" + 0.004*"super cute" + 0.004*"delicious service" + 0.003*"leur" + 0.002*"interesting": 
+5: 
+0.017*"matcha" + 0.014*"condiment" + 0.009*"baguette" + 0.008*"dad" + 0.007*"district" + 0.007*"prosciutto" + 0.007*"café" + 0.006*"simplicity" + 0.005*"peppermint" + 0.005*"polite": 
+8: 
+0.022*"contact" + 0.013*"panini" + 0.011*"wifi" + 0.010*"Could" + 0.008*"rubbery" + 0.007*"blast" + 0.007*"satisfaction" + 0.006*"Should" + 0.006*"strike" + 0.006*"cow": 
+17: 
+0.025*"croissant" + 0.021*"almond" + 0.020*"dirty" + 0.010*"code" + 0.009*"martini" + 0.006*"squash" + 0.006*"vodka" + 0.005*"blackberry" + 0.005*"great drink" + 0.004*"whiskey": 
+0: 
+0.021*"hide" + 0.019*"community" + 0.009*"branch" + 0.008*"custom" + 0.008*"hence" + 0.007*"Wo" + 0.006*"ai" + 0.006*"golf" + 0.005*"temp" + 0.005*"provolone": 
+23: 
+0.013*"fountain" + 0.013*"farm" + 0.012*"guest" + 0.011*"plant" + 0.010*"passion" + 0.010*"garden" + 0.009*"tot" + 0.008*"pepperoni" + 0.007*"tater" + 0.006*"hospitality": 
+15: 
+0.098*"bowl" + 0.024*"raman" + 0.016*"convenience" + 0.013*"lamb" + 0.012*"pho" + 0.010*"visitor" + 0.009*"beware" + 0.009*"ham" + 0.008*"macaroon" + 0.007*"love love": 
+11: 
+0.036*"movie" + 0.036*"Ca" + 0.024*"gas" + 0.015*"jam" + 0.014*"theater" + 0.010*"vacation" + 0.008*"fool" + 0.008*"gourmet" + 0.007*"competition" + 0.007*"test": 
+4: 
+0.117*"cookie" + 0.060*"latte" + 0.041*"yummy" + 0.013*"great selection" + 0.012*"cinnamon" + 0.012*"calorie" + 0.009*"access" + 0.008*"bike" + 0.007*"cornbread" + 0.005*"nice staff": 
+18: 
+0.020*"sale" + 0.017*"muffin" + 0.016*"study" + 0.016*"cafe" + 0.014*"poutine" + 0.012*"shake" + 0.012*"cart" + 0.011*"sum" + 0.009*"count" + 0.009*"dim": 
+6: 
+0.133*"chocolate" + 0.067*"cake" + 0.041*"taco" + 0.024*"candy" + 0.019*"gelato" + 0.018*"sell" + 0.015*"tortilla" + 0.011*"produce" + 0.011*"lol" + 0.008*"caramel": 
+2: 
+0.187*"bar" + 0.058*"music" + 0.041*"cocktail" + 0.033*"play" + 0.031*"bartender" + 0.008*"band" + 0.007*"venue" + 0.006*"song" + 0.006*"jump" + 0.006*"sip": 
+10: 
+0.136*"customer" + 0.063*"employee" + 0.062*"manager" + 0.039*"%" + 0.037*"card" + 0.024*"worker" + 0.019*"min" + 0.016*"management" + 0.013*"credit" + 0.012*"cashier": 
+24: 
+0.056*"wife" + 0.049*"Will" + 0.034*"ambiance" + 0.024*"great food" + 0.023*"ambience" + 0.021*"excellent" + 0.017*"platter" + 0.012*"mediocre" + 0.011*"moist" + 0.008*"well": 
+12: 
+0.067*"egg" + 0.034*"fruit" + 0.025*"bacon" + 0.023*"juice" + 0.023*"market" + 0.021*"toast" + 0.018*"dip" + 0.018*"brunch" + 0.017*"tomato" + 0.012*"bake": 
+7: 
+0.058*"store" + 0.051*"tea" + 0.048*"sandwich" + 0.047*"shop" + 0.027*"milk" + 0.025*"business" + 0.016*"chain" + 0.015*"product" + 0.014*"wall" + 0.010*"grocery": 
+20: 
+0.072*"location" + 0.048*"burger" + 0.043*"line" + 0.036*"area" + 0.035*"breakfast" + 0.031*"town" + 0.026*"drive" + 0.018*"morning" + 0.015*"room" + 0.013*"patio": 
+13: 
+0.045*"chicken" + 0.039*"sauce" + 0.036*"meat" + 0.033*"fry" + 0.023*"flavor" + 0.022*"rice" + 0.022*"beef" + 0.020*"pork" + 0.018*"side" + 0.018*"soup": 
+21: 
+0.130*"place" + 0.058*"food" + 0.035*"price" + 0.027*"try" + 0.026*"cream" + 0.022*"lot" + 0.021*"love" + 0.021*"taste" + 0.020*"ice" + 0.017*"selection": 
+14: 
+0.050*"order" + 0.037*"food" + 0.034*"time" + 0.028*"service" + 0.015*"restaurant" + 0.013*"menu" + 0.012*"eat" + 0.011*"way" + 0.011*"thing" + 0.009*"experience": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-10_01.csv
+num_rows: 21827
+Model path: ./models/my_lda_model-01_06_2020-10_01.pkl
+Perplexity: -15.5340169663721
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 313.52553606033325
+===========================================================
+1: 
+0.007*"see place" + 0.006*"lobby" + 0.006*"mission" + 0.006*"trap" + 0.005*"connection" + 0.005*"delicious service" + 0.005*"internet" + 0.004*"super cute" + 0.002*"free meal" + 0.002*"interesting": 
+17: 
+0.020*"almond" + 0.020*"dirty" + 0.010*"ve" + 0.009*"martini" + 0.009*"interest" + 0.008*"land" + 0.007*"gang" + 0.006*"vodka" + 0.006*"squash" + 0.005*"great drink": 
+8: 
+0.089*"donut" + 0.019*"contact" + 0.011*"panini" + 0.011*"response" + 0.009*"Could" + 0.008*"freezer" + 0.007*"rubbery" + 0.006*"blast" + 0.006*"Should" + 0.005*"tad": 
+0: 
+0.011*"Can" + 0.009*"branch" + 0.008*"hence" + 0.007*"pas" + 0.007*"Wo" + 0.006*"welcome" + 0.006*"ai" + 0.005*"temp" + 0.005*"provolone" + 0.005*"somehow": 
+5: 
+0.202*"tea" + 0.104*"milk" + 0.013*"green tea" + 0.011*"matcha" + 0.006*"dad" + 0.005*"prosciutto" + 0.005*"district" + 0.005*"café" + 0.004*"simplicity" + 0.004*"peppermint": 
+23: 
+0.026*"deliver" + 0.019*"mango" + 0.016*"truffle" + 0.012*"fountain" + 0.011*"farm" + 0.010*"plant" + 0.010*"passion" + 0.008*"tot" + 0.008*"pepperoni" + 0.008*"spaghetti": 
+15: 
+0.062*"pie" + 0.025*"raman" + 0.015*"convenience" + 0.014*"ham" + 0.013*"lamb" + 0.012*"pho" + 0.011*"power" + 0.011*"puff" + 0.010*"inspire" + 0.009*"visitor": 
+11: 
+0.035*"mall" + 0.033*"movie" + 0.022*"gas" + 0.017*"tax" + 0.015*"valley" + 0.014*"jam" + 0.014*"breast" + 0.013*"theater" + 0.010*"quaint" + 0.010*"force": 
+19: 
+0.058*"game" + 0.049*"dog" + 0.030*"shot" + 0.026*"tv" + 0.015*"sport" + 0.013*"powder" + 0.011*"drinker" + 0.011*"watch" + 0.009*"cat" + 0.008*"football": 
+16: 
+0.022*"cheesecake" + 0.019*"airport" + 0.019*"boba" + 0.017*"attitude" + 0.015*"fast" + 0.015*"flight" + 0.012*"brother" + 0.012*"fresh" + 0.011*"raspberry" + 0.009*"information": 
+24: 
+0.062*"wife" + 0.031*"honey" + 0.027*"lobster" + 0.024*"excellent" + 0.018*"tuna" + 0.014*"mediocre" + 0.013*"moist" + 0.009*"buttery" + 0.009*"well" + 0.009*"staple": 
+3: 
+0.203*"coffee" + 0.048*"pastry" + 0.031*"bakery" + 0.024*"station" + 0.023*"cupcake" + 0.023*"snack" + 0.022*"crepe" + 0.021*"daughter" + 0.012*"club" + 0.010*"cold": 
+10: 
+0.129*"store" + 0.060*"employee" + 0.060*"manager" + 0.039*"%" + 0.036*"card" + 0.023*"worker" + 0.022*"grocery" + 0.015*"cashier" + 0.014*"sell" + 0.013*"credit": 
+22: 
+0.146*"cream" + 0.113*"ice" + 0.101*"pizza" + 0.088*"shop" + 0.029*"product" + 0.022*"crust" + 0.015*"smoothie" + 0.009*"sub" + 0.008*"slice" + 0.008*"protein": 
+12: 
+0.061*"breakfast" + 0.060*"egg" + 0.031*"morning" + 0.029*"fruit" + 0.021*"juice" + 0.019*"market" + 0.019*"toast" + 0.017*"sausage" + 0.017*"bacon" + 0.016*"brunch": 
+7: 
+0.082*"burger" + 0.081*"fry" + 0.073*"sandwich" + 0.028*"grill" + 0.017*"cut" + 0.016*"dip" + 0.015*"pull" + 0.013*"pop" + 0.012*"smell" + 0.011*"brisket": 
+13: 
+0.042*"flavor" + 0.042*"chicken" + 0.037*"sauce" + 0.034*"meat" + 0.021*"rice" + 0.021*"beef" + 0.020*"taste" + 0.020*"salad" + 0.019*"roll" + 0.019*"side": 
+20: 
+0.041*"bar" + 0.031*"line" + 0.029*"chocolate" + 0.027*"area" + 0.025*"night" + 0.021*"town" + 0.018*"drive" + 0.016*"room" + 0.013*"kid" + 0.013*"cake": 
+21: 
+0.131*"place" + 0.122*"food" + 0.035*"price" + 0.029*"service" + 0.029*"try" + 0.023*"lot" + 0.021*"love" + 0.018*"lunch" + 0.017*"selection" + 0.016*"taste": 
+14: 
+0.054*"order" + 0.037*"time" + 0.020*"service" + 0.017*"restaurant" + 0.014*"menu" + 0.014*"eat" + 0.013*"thing" + 0.012*"way" + 0.012*"location" + 0.011*"day": 
+===========================================================
+* No noun phrases, just nouns
+Data path: pickles\yelp_25k-01_06_2020-12_18.csv
+num_rows: 10
+Model path: ./models/my_lda_model-01_06_2020-12_18.pkl
+Perplexity: -6.089060927746613
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 0.0358729362487793
+===========================================================
+3: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+16: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+14: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+11: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+19: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+18: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+17: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+23: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+9: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+13: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+6: 
+0.006*"dim" + 0.006*"dish" + 0.006*"gravy" + 0.006*"gravy do taste" + 0.006*"taste" + 0.006*"test" + 0.006*"bad expensive either" + 0.006*"cart" + 0.006*"free version" + 0.006*"dinner": 
+10: 
+0.125*"typical diner" + 0.125*"little rude order" + 0.005*"dim" + 0.005*"gravy" + 0.005*"gravy do taste" + 0.005*"taste" + 0.005*"test" + 0.005*"bad expensive either" + 0.005*"cart" + 0.005*"free version": 
+2: 
+0.078*"same thing" + 0.078*"serve same thing" + 0.078*"start" + 0.078*"start salami mustard staff" + 0.078*"super simple place" + 0.078*"salami mustard staff" + 0.078*"mustard staff" + 0.003*"cart" + 0.003*"taste" + 0.003*"dim": 
+22: 
+0.060*"test" + 0.060*"gluten free version" + 0.060*"free version" + 0.060*"do taste" + 0.060*"gravy do taste" + 0.060*"cheese" + 0.060*"bad love gluten free version" + 0.060*"bad love" + 0.060*"taste" + 0.060*"gravy": 
+7: 
+0.040*"same term" + 0.040*"phos" + 0.040*"vermicelli" + 0.040*"try phos" + 0.040*"try" + 0.040*"time" + 0.040*"street" + 0.040*"steamed vermicelli" + 0.040*"cuon steamed vermicelli" + 0.040*"pricing": 
+1: 
+0.038*"salmon dish lamb" + 0.038*"seat" + 0.038*"minute walk" + 0.038*"tartar" + 0.038*"reservation" + 0.038*"restaurant" + 0.038*"menu" + 0.038*"take metro" + 0.038*"start salmon dish lamb" + 0.038*"meal": 
+5: 
+0.091*"order" + 0.031*"peanut" + 0.031*"place" + 0.031*"need floor" + 0.031*"meat" + 0.031*"make order" + 0.031*"speak" + 0.031*"small burger" + 0.031*"add bit spice size" + 0.031*"regular burger": 
+8: 
+0.029*"dish sort" + 0.029*"concept" + 0.029*"great place" + 0.029*"cheese place" + 0.029*"gluten vegan restriction" + 0.029*"friend" + 0.029*"food" + 0.029*"group" + 0.029*"base" + 0.029*"%": 
+0: 
+0.089*"dim" + 0.059*"sum" + 0.059*"menu" + 0.030*"tasty" + 0.030*"bad expensive either" + 0.030*"cart" + 0.030*"dinner" + 0.030*"dish" + 0.030*"family" + 0.030*"type": 
+12: 
+0.061*"meat" + 0.061*"smoked meat" + 0.031*"chocolate" + 0.031*"head" + 0.031*"seat" + 0.031*"croissant" + 0.031*"coffee\/latté" + 0.031*"chocolaty look light breakfast" + 0.031*"light buttery" + 0.031*"beautiful neighborhood": 
+===========================================================
+* No noun phrases, just nouns
+Data path: pickles\yelp_25k-01_06_2020-12_20.csv
+num_rows: 10
+Model path: ./models/my_lda_model-01_06_2020-12_20.pkl
+Perplexity: -5.975514227961317
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 0.04886937141418457
+===========================================================
+6: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+0: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+16: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+12: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+17: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+1: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+14: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+2: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+24: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+4: 
+0.007*"dim" + 0.007*"dinner" + 0.007*"gluten free version" + 0.007*"gravy" + 0.007*"taste" + 0.007*"test" + 0.007*"bad expensive either" + 0.007*"cart" + 0.007*"do taste" + 0.007*"feed family": 
+20: 
+0.132*"little rude order" + 0.132*"typical diner" + 0.005*"dim" + 0.005*"gluten free version" + 0.005*"gravy" + 0.005*"taste" + 0.005*"test" + 0.005*"bad expensive either" + 0.005*"cart" + 0.005*"do taste": 
+19: 
+0.088*"salami mustard staff" + 0.088*"same thing" + 0.088*"serve same thing" + 0.088*"start" + 0.088*"super simple place" + 0.088*"mustard staff" + 0.003*"bad expensive either" + 0.003*"cart" + 0.003*"dinner" + 0.003*"test": 
+23: 
+0.062*"almond" + 0.062*"chocolate" + 0.062*"head" + 0.062*"coffee\/latté" + 0.062*"perfect spot" + 0.062*"light buttery" + 0.062*"light breakfast" + 0.062*"croissant" + 0.062*"chocolaty look" + 0.062*"breakfast": 
+7: 
+0.103*"meat" + 0.103*"smoked meat" + 0.052*"deli brisket" + 0.052*"quality taste" + 0.052*"get about seat" + 0.052*"tourist" + 0.052*"locate" + 0.052*"seat" + 0.052*"about seat" + 0.052*"sandwich come montreal": 
+21: 
+0.042*"same term" + 0.042*"pricing" + 0.042*"vermicelli" + 0.042*"try phos" + 0.042*"try" + 0.042*"time" + 0.042*"street" + 0.042*"steamed vermicelli" + 0.042*"cuon" + 0.042*"neighbourhood": 
+8: 
+0.039*"salmon dish lamb" + 0.039*"small unassume place" + 0.039*"pork" + 0.039*"tartar" + 0.039*"restaurant" + 0.039*"metro" + 0.039*"seat" + 0.039*"take metro" + 0.039*"station" + 0.039*"menu": 
+5: 
+0.095*"order" + 0.033*"make order" + 0.033*"good burger" + 0.033*"small burger" + 0.033*"regular burger" + 0.033*"place" + 0.033*"peanut" + 0.033*"need floor" + 0.033*"meat" + 0.033*"mean regular burger": 
+13: 
+0.032*"concept" + 0.032*"communal wind" + 0.032*"birthday group" + 0.032*"friend" + 0.032*"food" + 0.032*"dish sort" + 0.032*"great place" + 0.032*"place" + 0.032*"base" + 0.032*"gluten vegan restriction": 
+10: 
+0.092*"dim" + 0.062*"sum" + 0.062*"menu" + 0.032*"sheet" + 0.032*"cart" + 0.032*"dinner" + 0.032*"dish" + 0.032*"type" + 0.032*"tasty" + 0.032*"sum order": 
+22: 
+0.070*"test" + 0.070*"gravy" + 0.070*"gluten free version" + 0.070*"free version" + 0.070*"do taste" + 0.070*"curd" + 0.070*"cheese" + 0.070*"bad love" + 0.070*"taste" + 0.003*"old port": 
+===========================================================
+* No noun phrases, just nouns
+Data path: pickles\yelp_25k-01_06_2020-12_26.csv
+num_rows: 10
+Model path: ./models/my_lda_model-01_06_2020-12_26.pkl
+Perplexity: -5.397350075850917
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 0.05585050582885742
+===========================================================
+18: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+8: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+0: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+12: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+5: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+7: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+1: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+2: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+13: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+20: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+11: 
+0.006*"dim" + 0.006*"dinner" + 0.006*"gluten" + 0.006*"gluten free version" + 0.006*"gravy" + 0.006*"love" + 0.006*"test" + 0.006*"version" + 0.006*"bad expensive either" + 0.006*"cart": 
+22: 
+0.085*"diner" + 0.085*"typical diner" + 0.085*"calamari" + 0.085*"little rude order" + 0.085*"order" + 0.003*"bad expensive either" + 0.003*"test" + 0.003*"gluten" + 0.003*"gluten free version" + 0.003*"love": 
+9: 
+0.119*"start" + 0.060*"thing" + 0.060*"staff" + 0.060*"super simple place" + 0.060*"mustard staff" + 0.060*"same thing" + 0.060*"place" + 0.060*"serve same thing" + 0.060*"salami mustard staff" + 0.002*"cart": 
+4: 
+0.084*"gravy" + 0.084*"cheese" + 0.084*"taste" + 0.084*"test" + 0.084*"curd" + 0.043*"love" + 0.043*"gluten" + 0.043*"bad love" + 0.043*"gluten free version" + 0.043*"free version": 
+19: 
+0.072*"chocolate" + 0.072*"almond" + 0.072*"breakfast" + 0.072*"croissant" + 0.072*"head" + 0.072*"coffee\/latté" + 0.037*"look" + 0.037*"light breakfast" + 0.037*"chocolaty look" + 0.037*"buttery": 
+24: 
+0.074*"time" + 0.050*"cuon" + 0.050*"beef" + 0.050*"vermicelli" + 0.050*"try" + 0.050*"street" + 0.050*"pricing" + 0.050*"restaurant" + 0.050*"phos" + 0.050*"disappoint": 
+21: 
+0.042*"beef" + 0.042*"restaurant" + 0.042*"tartar" + 0.042*"pork" + 0.042*"change" + 0.042*"metro" + 0.042*"station" + 0.042*"reservation" + 0.042*"call" + 0.042*"meal": 
+10: 
+0.087*"place" + 0.052*"group" + 0.035*"interesting" + 0.035*"hype" + 0.035*"food" + 0.035*"%" + 0.035*"base" + 0.035*"concept" + 0.035*"friend" + 0.035*"would": 
+14: 
+0.116*"order" + 0.058*"burger" + 0.039*"meat" + 0.039*"give" + 0.039*"peanut" + 0.039*"place" + 0.039*"sweep" + 0.039*"floor" + 0.039*"come" + 0.039*"deliciousness": 
+23: 
+0.073*"dim" + 0.049*"meat" + 0.049*"sum" + 0.049*"menu" + 0.037*"order" + 0.037*"dinner" + 0.025*"family" + 0.025*"cart" + 0.025*"dish" + 0.025*"tourist": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-12_28.csv
+num_rows: 1000
+Model path: ./models/my_lda_model-01_06_2020-12_28.pkl
+Perplexity: -8.565352819235757
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 7.903862476348877
+===========================================================
+19: 
+0.008*"order" + 0.006*"brisket" + 0.006*"food" + 0.005*"union" + 0.004*"waitress" + 0.004*"service" + 0.004*"coffee" + 0.004*"crevette" + 0.003*"dan" + 0.003*"way": 
+9: 
+0.013*"option" + 0.009*"pizza" + 0.008*"order" + 0.008*"time" + 0.008*"menu" + 0.005*"tot" + 0.005*"family" + 0.005*"food" + 0.005*"service" + 0.005*"price": 
+6: 
+0.018*"place" + 0.007*"onion" + 0.007*"food" + 0.007*"wait" + 0.006*"meat" + 0.006*"bar" + 0.005*"night" + 0.005*"service" + 0.005*"beer" + 0.005*"burger": 
+7: 
+0.011*"food" + 0.011*"place" + 0.009*"time" + 0.009*"m" + 0.006*"flavor" + 0.005*"portion" + 0.005*"price" + 0.004*"pasta" + 0.004*"order" + 0.004*"week": 
+8: 
+0.011*"food" + 0.008*"order" + 0.006*"staff" + 0.006*"reservation" + 0.005*"burger" + 0.004*"roll" + 0.004*"time" + 0.003*"si" + 0.003*"benedict" + 0.003*"pork": 
+4: 
+0.011*"order" + 0.008*"service" + 0.007*"day" + 0.006*"kid" + 0.005*"time" + 0.005*"chicken" + 0.005*"problem" + 0.004*"bacon" + 0.004*"try" + 0.004*"menu": 
+5: 
+0.014*"order" + 0.013*"pizza" + 0.010*"place" + 0.008*"diner" + 0.006*"time" + 0.005*"lot" + 0.005*"location" + 0.004*"food" + 0.004*"egg" + 0.004*"feel": 
+22: 
+0.009*"food" + 0.008*"time" + 0.007*"place" + 0.007*"cocktail" + 0.006*"bit" + 0.006*"beef" + 0.005*"love" + 0.005*"try" + 0.005*"service" + 0.004*"lamb": 
+11: 
+0.014*"food" + 0.011*"service" + 0.007*"order" + 0.006*"fact" + 0.006*"bar" + 0.005*"try" + 0.005*"pay" + 0.005*"price" + 0.005*"apple" + 0.005*"experience": 
+13: 
+0.016*"place" + 0.009*"sauce" + 0.008*"time" + 0.007*"dinner" + 0.007*"customer" + 0.006*"bread" + 0.006*"service" + 0.004*"price" + 0.004*"try" + 0.004*"menu": 
+1: 
+0.017*"order" + 0.009*"place" + 0.008*"service" + 0.008*"food" + 0.007*"menu" + 0.006*"look" + 0.006*"time" + 0.006*"drink" + 0.005*"way" + 0.005*"get": 
+0: 
+0.021*"place" + 0.018*"order" + 0.018*"food" + 0.008*"dinner" + 0.006*"m" + 0.006*"people" + 0.006*"menu" + 0.006*"bar" + 0.006*"price" + 0.006*"lunch": 
+10: 
+0.022*"pas" + 0.017*"y" + 0.017*"dan" + 0.015*"car" + 0.014*"pour" + 0.014*"c" + 0.013*"alor" + 0.011*"manger" + 0.009*"serveur" + 0.008*"service": 
+3: 
+0.027*"place" + 0.018*"order" + 0.014*"food" + 0.012*"time" + 0.008*"room" + 0.006*"try" + 0.005*"area" + 0.005*"people" + 0.005*"walk" + 0.005*"day": 
+24: 
+0.015*"food" + 0.012*"time" + 0.011*"place" + 0.011*"order" + 0.009*"menu" + 0.009*"chicken" + 0.008*"location" + 0.007*"taste" + 0.006*"meat" + 0.006*"thing": 
+20: 
+0.016*"food" + 0.014*"service" + 0.014*"place" + 0.010*"menu" + 0.009*"time" + 0.008*"order" + 0.007*"fry" + 0.007*"m" + 0.006*"try" + 0.006*"lot": 
+23: 
+0.028*"place" + 0.012*"food" + 0.010*"time" + 0.009*"price" + 0.008*"bar" + 0.006*"m" + 0.005*"order" + 0.005*"thing" + 0.005*"look" + 0.005*"option": 
+18: 
+0.021*"order" + 0.019*"place" + 0.009*"food" + 0.008*"time" + 0.008*"service" + 0.006*"burger" + 0.006*"lunch" + 0.006*"day" + 0.005*"flavor" + 0.005*"bar": 
+14: 
+0.044*"food" + 0.022*"place" + 0.017*"order" + 0.013*"time" + 0.009*"restaurant" + 0.008*"service" + 0.007*"eat" + 0.006*"way" + 0.006*"try" + 0.006*"wait": 
+2: 
+0.034*"order" + 0.026*"food" + 0.021*"place" + 0.012*"time" + 0.010*"service" + 0.010*"restaurant" + 0.008*"menu" + 0.007*"friend" + 0.005*"meal" + 0.005*"chicken": 
+===========================================================
+* No noun phrases, just nouns
+Data path: pickles\yelp_25k-01_06_2020-12_31.csv
+num_rows: 1000
+Model path: ./models/my_lda_model-01_06_2020-12_31.pkl
+Perplexity: -7.595062575880551
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 5.981003761291504
+===========================================================
+6: 
+0.014*"lobster" + 0.012*"cocktail" + 0.011*"try" + 0.011*"egg" + 0.008*"lot" + 0.007*"crab" + 0.007*"way" + 0.007*"pork" + 0.007*"option" + 0.007*"onion": 
+22: 
+0.016*"time" + 0.013*"m" + 0.012*"place" + 0.012*"food" + 0.007*"breakfast" + 0.007*"amount" + 0.007*"staff" + 0.007*"order" + 0.006*"egg" + 0.006*"bar": 
+23: 
+0.024*"order" + 0.023*"time" + 0.016*"place" + 0.015*"line" + 0.014*"date" + 0.013*"get" + 0.012*"food" + 0.012*"view" + 0.010*"eat" + 0.010*"service": 
+11: 
+0.020*"place" + 0.018*"food" + 0.014*"taste" + 0.012*"thing" + 0.012*"lot" + 0.008*"price" + 0.008*"location" + 0.008*"coffee" + 0.008*"brisket" + 0.008*"staff": 
+4: 
+0.022*"beer" + 0.016*"time" + 0.014*"food" + 0.012*"bar" + 0.011*"place" + 0.008*"service" + 0.007*"feel" + 0.007*"thing" + 0.006*"chain" + 0.006*"sit": 
+20: 
+0.015*"food" + 0.015*"order" + 0.013*"time" + 0.012*"place" + 0.011*"m" + 0.010*"customer" + 0.008*"people" + 0.008*"try" + 0.007*"feel" + 0.007*"restaurant": 
+17: 
+0.024*"tea" + 0.022*"order" + 0.022*"place" + 0.017*"menu" + 0.014*"meat" + 0.014*"time" + 0.011*"friend" + 0.008*"day" + 0.008*"lunch" + 0.007*"review": 
+14: 
+0.027*"pizza" + 0.018*"order" + 0.015*"restaurant" + 0.013*"eat" + 0.011*"food" + 0.009*"morning" + 0.009*"price" + 0.009*"bit" + 0.008*"people" + 0.008*"piece": 
+18: 
+0.038*"place" + 0.015*"food" + 0.011*"burger" + 0.011*"thing" + 0.010*"pizza" + 0.008*"drink" + 0.008*"reason" + 0.007*"lunch" + 0.006*"service" + 0.006*"price": 
+16: 
+0.025*"option" + 0.020*"order" + 0.019*"try" + 0.017*"menu" + 0.017*"place" + 0.016*"raman" + 0.013*"soup" + 0.013*"time" + 0.011*"service" + 0.010*"appetizer": 
+1: 
+0.034*"food" + 0.021*"service" + 0.019*"order" + 0.018*"time" + 0.016*"place" + 0.013*"meat" + 0.012*"menu" + 0.010*"bit" + 0.009*"friend" + 0.009*"eat": 
+2: 
+0.050*"order" + 0.025*"food" + 0.021*"place" + 0.014*"m" + 0.013*"flavor" + 0.012*"service" + 0.011*"bread" + 0.010*"meal" + 0.010*"portion" + 0.010*"side": 
+7: 
+0.042*"burger" + 0.027*"place" + 0.026*"food" + 0.022*"order" + 0.019*"time" + 0.011*"service" + 0.010*"staff" + 0.009*"flavor" + 0.009*"meat" + 0.008*"thing": 
+9: 
+0.037*"food" + 0.028*"order" + 0.020*"place" + 0.017*"service" + 0.011*"restaurant" + 0.010*"friend" + 0.009*"meal" + 0.009*"dinner" + 0.008*"menu" + 0.007*"location": 
+12: 
+0.050*"order" + 0.032*"food" + 0.013*"place" + 0.011*"service" + 0.011*"night" + 0.011*"price" + 0.010*"menu" + 0.009*"shrimp" + 0.009*"time" + 0.009*"dish": 
+24: 
+0.030*"place" + 0.029*"time" + 0.017*"order" + 0.015*"food" + 0.009*"look" + 0.008*"try" + 0.008*"lunch" + 0.008*"people" + 0.008*"lot" + 0.007*"bar": 
+21: 
+0.031*"dan" + 0.030*"y" + 0.027*"pas" + 0.026*"c" + 0.022*"pour" + 0.021*"car" + 0.019*"alor" + 0.015*"manger" + 0.014*"serveur" + 0.014*"sont": 
+15: 
+0.039*"food" + 0.024*"order" + 0.023*"place" + 0.015*"restaurant" + 0.013*"people" + 0.013*"time" + 0.011*"menu" + 0.010*"option" + 0.010*"service" + 0.009*"try": 
+13: 
+0.096*"place" + 0.041*"food" + 0.026*"time" + 0.022*"staff" + 0.019*"service" + 0.015*"location" + 0.015*"price" + 0.013*"bar" + 0.011*"visit" + 0.011*"people": 
+10: 
+0.037*"place" + 0.025*"food" + 0.022*"time" + 0.013*"order" + 0.010*"price" + 0.010*"bar" + 0.009*"area" + 0.008*"hour" + 0.007*"way" + 0.007*"day": 
+===========================================================
+Data path: pickles\yelp_25k-01_06_2020-12_36.csv
+num_rows: 21827
+Model path: ./models/my_lda_model-01_06_2020-12_36.pkl
+Perplexity: -14.882433026115585
+chunksize: 1000
+num_topics: 25
+passes: 20
+iterations: 500
+elapsed time: 270.42777848243713
+===========================================================
+7: 
+0.029*"chill" + 0.026*"boba" + 0.018*"train" + 0.015*"tray" + 0.015*"twist" + 0.014*"farm" + 0.011*"bike" + 0.009*"layout" + 0.009*"joy" + 0.009*"preparation": 
+9: 
+0.048*"lobster" + 0.025*"airport" + 0.023*"carry" + 0.019*"flight" + 0.012*"vacation" + 0.008*"regular" + 0.007*"cane" + 0.005*"genius" + 0.005*"fashion" + 0.005*"eel": 
+3: 
+0.048*"crepe" + 0.047*"daughter" + 0.040*"smoothie" + 0.033*"craft" + 0.018*"filet" + 0.016*"ham" + 0.015*"wing" + 0.011*"edge" + 0.007*"prosciutto" + 0.007*"shock": 
+4: 
+0.039*"brisket" + 0.021*"moist" + 0.020*"dress" + 0.014*"promise" + 0.012*"seem" + 0.012*"fat" + 0.012*"pain" + 0.009*"trend" + 0.008*"ignore" + 0.007*"mild": 
+18: 
+0.024*"club" + 0.021*"situation" + 0.019*"hip" + 0.016*"y" + 0.014*"wheat" + 0.013*"adult" + 0.012*"hop" + 0.009*"c" + 0.009*"page" + 0.009*"regard": 
+13: 
+0.216*"store" + 0.076*"pastry" + 0.049*"bakery" + 0.037*"snack" + 0.018*"bomb" + 0.017*"croissant" + 0.014*"almond" + 0.012*"powder" + 0.010*"bbq" + 0.009*"deli": 
+24: 
+0.047*"grocery" + 0.031*"gelato" + 0.012*"good selection" + 0.011*"begin" + 0.011*"volume" + 0.011*"hipster" + 0.011*"wash" + 0.010*"visitor" + 0.008*"garbage" + 0.008*"code": 
+22: 
+0.036*"candy" + 0.022*"pricey" + 0.018*"protein" + 0.015*"truffle" + 0.012*"seed" + 0.010*"scallop" + 0.010*"skewer" + 0.010*"second time" + 0.009*"pint" + 0.009*"account": 
+5: 
+0.042*"station" + 0.036*"yogurt" + 0.028*"support" + 0.022*"plain" + 0.021*"gas" + 0.012*"caramel" + 0.012*"well" + 0.012*"app" + 0.011*"pad" + 0.011*"raspberry": 
+16: 
+0.091*"bowl" + 0.075*"will" + 0.036*"salmon" + 0.025*"rock" + 0.021*"amazing" + 0.019*"sushi" + 0.019*"spring" + 0.013*"poutine" + 0.012*"pistachio" + 0.011*"pho": 
+12: 
+0.087*"chip" + 0.051*"donut" + 0.042*"taco" + 0.030*"cash" + 0.028*"cupcake" + 0.021*"burrito" + 0.017*"credit" + 0.016*"salsa" + 0.016*"tortilla" + 0.013*"fix": 
+8: 
+0.228*"location" + 0.040*"talk" + 0.035*"dog" + 0.030*"bartender" + 0.020*"management" + 0.013*"ticket" + 0.013*"sub" + 0.010*"fast" + 0.010*"pool" + 0.009*"distance": 
+19: 
+0.125*"tea" + 0.098*"breakfast" + 0.069*"cookie" + 0.064*"milk" + 0.040*"morning" + 0.025*"brunch" + 0.021*"coupon" + 0.014*"design" + 0.013*"pot" + 0.013*"toast": 
+10: 
+0.109*"egg" + 0.068*"steak" + 0.036*"buffet" + 0.032*"crab" + 0.032*"sausage" + 0.030*"seafood" + 0.015*"rate" + 0.015*"pancake" + 0.013*"hash" + 0.011*"parent": 
+2: 
+0.089*"burger" + 0.086*"pizza" + 0.079*"sandwich" + 0.024*"product" + 0.023*"pie" + 0.020*"market" + 0.018*"crust" + 0.015*"truck" + 0.015*"slice" + 0.013*"stock": 
+0: 
+0.054*"chocolate" + 0.049*"salad" + 0.042*"dessert" + 0.042*"portion" + 0.036*"bread" + 0.036*"husband" + 0.036*"size" + 0.029*"share" + 0.027*"cake" + 0.023*"fruit": 
+1: 
+0.058*"bar" + 0.057*"night" + 0.048*"dinner" + 0.031*"family" + 0.023*"room" + 0.021*"wine" + 0.019*"group" + 0.018*"music" + 0.016*"fun" + 0.015*"reservation": 
+21: 
+0.037*"flavor" + 0.035*"chicken" + 0.031*"sauce" + 0.030*"taste" + 0.029*"meat" + 0.026*"fry" + 0.019*"side" + 0.018*"rice" + 0.017*"beef" + 0.017*"bit": 
+14: 
+0.183*"place" + 0.035*"lot" + 0.031*"try" + 0.030*"love" + 0.029*"area" + 0.023*"selection" + 0.022*"option" + 0.020*"staff" + 0.020*"spot" + 0.020*"price": 
+15: 
+0.064*"food" + 0.051*"order" + 0.035*"time" + 0.032*"service" + 0.016*"restaurant" + 0.015*"eat" + 0.012*"thing" + 0.012*"way" + 0.012*"day" + 0.011*"menu": 

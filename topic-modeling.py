@@ -75,6 +75,11 @@ def lemmatization(texts, allowed_postags=['NOUN', 'ADJ', 'VERB', 'ADV']):
         texts_out.append([token.lemma_ for token in doc if token.pos_ in allowed_postags])
     return texts_out
 
+
+import logging
+logging.basicConfig(filename='gensim.log',
+                    format="%(asctime)s:%(levelname)s:%(message)s",
+                    level=logging.INFO)
 def buildLDAModel():
     data_words = list(sent_to_words(data))
 
@@ -126,14 +131,15 @@ def buildLDAModel():
 
     ## Build LDA model
     lda_model = LdaModel(corpus=corpus,
-                           id2word=id2word,
-                           num_topics=20,
-                           random_state=100,
-                           update_every=1,
-                           chunksize=100,
-                           passes=10,
-                           alpha='auto',
-                           per_word_topics=True)
+                            id2word=id2word,
+                            num_topics=25,
+                            random_state=100,
+                            update_every=1,
+                            chunksize=1000,
+                            passes=20,
+                            iterations=500,
+                            alpha='auto',
+                            per_word_topics=True)
 
 
     ## Print the Keyword in the 10 topics
