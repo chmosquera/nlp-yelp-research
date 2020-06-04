@@ -1,34 +1,37 @@
-
-samples = []
-
-samples.append("""Small unassuming place that changes their menu every so often. Cool decor and vibe inside their 30 seat restaurant. Call for a reservation.
-
-We had their beef tartar and pork belly to start and a salmon dish and lamb meal for mains. Everything was incredible! I could go on at length about how all the listed ingredients really make their dishes amazing but honestly you just need to go.
-
-A bit outside of downtown montreal but take the metro out and it's less than a 10 minute walk from the station.""")
-
-samples.append("""Server was a little rude.
-
-Ordered the calamari, duck confit poutine and the trout fish with miso soba - all very tasty. Definitely not your typical diner.
-""")
-
-samples.append("""Hidden on the east end of the Danforth is a lovely Thai restaurant. Found this restaurant while surfing on Yelp.
-
-Surprisingly this place is pretty big to seat a big group of 12 and still have a few more small tables available. They are mainly a take-out restaurant, as many of the customers came in for take-out, and the service was a little bit slow. However, the food was great and it accommodating for many different people - seafood lovers, vegans, etc.
-
-Definitely recommend the basil fried rice and the fried sole fish with eggplant but for those curry lovers out there, stay away from the roti curry chicken - no curry taste, just coconut favour. But the Roti itself was really good.
-
-Most of the dishes were under $10 - definitely a good deal!
-
-""")
-
-import nltk
+import nltk, os
 from nltk import Tree
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 lemmatizer = WordNetLemmatizer()
 from topic_extraction.topic_classification_model import YelpTopicClassification
+
+
+def loadData(self):
+    global FOOD_VOCAB, ATMSOSPHERE_VOCAB, SERVE_VOCAB, PRICE_VOCAB
+    path = os.path.join(os.path.dirname(__file__), "..\\data\\foods.txt")
+    data = open(path)
+    FOOD_VOCAB = data.readlines()[0].split(',')
+    FOOD_VOCAB = list(set(self.food_vocab))
+    data.close()
+
+    path = os.path.join(os.path.dirname(__file__), "..\\data\\atmosphere.txt")
+    data = open(path)
+    ATMSOSPHERE_VOCAB = data.readlines()[0].split(',')
+    ATMSOSPHERE_VOCAB = list(set(self.atmosphere_vocab))
+    data.close()
+
+    path = os.path.join(os.path.dirname(__file__), "..\\data\\service.txt")
+    data = open(path)
+    SERVE_VOCAB = data.readlines()[0].split(',')
+    SERVE_VOCAB = list(set(self.service_vocab))
+    data.close()
+
+    path = os.path.join(os.path.dirname(__file__), "..\\data\\price.txt")
+    data = open(path)
+    PRICE_VOCAB = data.readlines()[0].split(',')
+    PRICE_VOCAB = list(set(self.price_vocab))
+    data.close()
 
 def getWordnetPOS(treebank_tag):
     if treebank_tag.startswith('J'):
@@ -98,6 +101,7 @@ def extractPhrases(review, debug=False):
     return phrases
 
 def extractTopics(review):
+    # preprocess raw text
     tokenized = nltk.word_tokenize(review)
     filtered = filterTokens(tokenized)
     tagged = nltk.pos_tag(filtered)
@@ -126,30 +130,38 @@ def extractTopics(review):
     topics = []
     for noun in lemma_nouns:
         noun = noun.lower()
-        if noun in YTC.food_vocab:
+        if noun in FOOD_VOCAB:
             topics.append((noun, "<FOOD>"))
-        if noun in YTC.atmosphere_vocab:
-            topics.append((noun, "<ATMS>"))
-        if noun in YTC.price_vocab:
+        if noun in ATMOSPHERE_VOCAB:
+            topics.append((noun, "<ATMSOSPHERE>"))
+        if noun in PRICE_VOCAB:
             topics.append((noun, "<PRICE>"))
-        if noun in YTC.service_vocab:
+        if noun in SERVICE_VOCAB:
             topics.append((noun, "<SERVICE>"))
 
     return topics
 
-def extractOpinionWords():
-    # Get all the adjectives in the text,
-    # https://datascience.stackexchange.com/questions/41285/any-efficient-way-to-find-surrounding-adjective-verbs-with-respect-to-the-target
-    return
 
-YTC = YelpTopicClassification()
-YTC.loadData()
+def main():
+    loadData()
+
+
+# Global vars
+FOOD_VOCAB = []
+ATMOSPHERE_VOCAB = []
+SERVICE_VOCAB = []
+PRICE_VOCAB = []
+
+if __name__ == '__main__':
+    main()
 
 # print(samples[2])
 # topics = extractTopics(samples[2])
 # print("TOPICS: \n")
 # print(topics)
 
-extractPhrases2(samples[0])
-topics = extractTopics(samples[0])
-print(topics)
+## Test
+# samples =
+# extractPhrases2(samples[0])
+# topics = extractTopics(samples[0])
+# print(topics)
