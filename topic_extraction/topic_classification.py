@@ -22,12 +22,13 @@ Most of the dishes were under $10 - definitely a good deal!
 
 """)
 
-import nltk, spacy, pickle, time, pprint
+import nltk
+from nltk import Tree
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 lemmatizer = WordNetLemmatizer()
-from topic_classification_model import YelpTopicClassification
+from topic_extraction.topic_classification_model import YelpTopicClassification
 
 def getWordnetPOS(treebank_tag):
     if treebank_tag.startswith('J'):
@@ -56,6 +57,23 @@ def lemmatize(tagged):
             lemmas.append(lemmatizer.lemmatize(token, pos=wn_tag))
     return lemmas
 
+
+def extractPhrases2(review):
+    tokenized = nltk.word_tokenize(review.lower())
+    tagged = nltk.pos_tag(tokenized)
+
+    grammar = r"""
+      NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
+      PP: {<IN><NP>}               # Chunk prepositions followed by NP
+      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP>} # Chunk verbs and their arguments
+      # CLAUSE: {<NP><VP>}           # Chunk NP, VP
+      """
+    chunker = nltk.RegexpParser(grammar)
+    tree = chunker.parse(tagged)
+    firstTime = True
+    # for subtree in tree.subtrees():
+    Tree.fromstring(str(tree)).pretty_print()
+
 def regexChunker(sentence):
     grammar = r"""
       NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
@@ -67,7 +85,7 @@ def regexChunker(sentence):
     return chunked.parse(sentence)
 
 # Takes a list of lemmatized tokens, returns a list of (text, grammar label) pairs of phrases
-def extractPhrases(review):
+def extractPhrases(review, debug=False):
     tokenized = nltk.word_tokenize(review)
     tagged = nltk.pos_tag(tokenized)
     tree = regexChunker(tagged)
@@ -127,7 +145,11 @@ def extractOpinionWords():
 YTC = YelpTopicClassification()
 YTC.loadData()
 
-print(samples[2])
-topics = extractTopics(samples[2])
-print("TOPICS: \n")
+# print(samples[2])
+# topics = extractTopics(samples[2])
+# print("TOPICS: \n")
+# print(topics)
+
+extractPhrases2(samples[0])
+topics = extractTopics(samples[0])
 print(topics)
