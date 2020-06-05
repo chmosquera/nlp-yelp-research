@@ -1,0 +1,150 @@
+----------------------------
+Original text: 
+Super simple place but amazing nonetheless. It's been around since the 30's and they still serve the same thing they started with: a bologna and salami sandwich with mustard. 
+
+Staff was very helpful and friendly.
+----------------------------
+super simple place but amazing nonetheless.
+   (food) place : 0.256
+it's been around since the 30's and they still serve the same thing they started with: a bologna and salami sandwich with mustard.
+   (None) it : 0.119
+   (None) they : 0.119
+   (food) thing : 0.119
+   (None) they : 0.119
+   (food) bologna : 0.119
+   (food) sandwich : 0.119
+   (food) mustard : 0.119
+staff was very helpful and friendly.
+   (food) staff : 0.572
+
+
+----------------------------
+Original text: 
+Small unassuming place that changes their menu every so often. Cool decor and vibe inside their 30 seat restaurant. Call for a reservation. 
+
+We had their beef tartar and pork belly to start and a salmon dish and lamb meal for mains. Everything was incredible! I could go on at length about how all the listed ingredients really make their dishes amazing but honestly you just need to go. 
+
+A bit outside of downtown montreal but take the metro out and it's less than a 10 minute walk from the station.
+----------------------------
+small unassuming place that changes their menu every so often.
+   (food) place : -0.029
+   (price) menu : -0.029
+cool decor and vibe inside their 30 seat restaurant.
+   (other) decor : -0.312
+   (other) vibe : -0.312
+   (other) restaurant : -0.312
+call for a reservation.
+   (other) reservation : 0.018
+we had their beef tartar and pork belly to start and a salmon dish and lamb meal for mains.
+   (None) we : -0.061
+   (other) tartar : -0.061
+   (other) belly : -0.061
+   (other) mains : -0.061
+everything was incredible!
+   (other) everything : 0.01
+i could go on at length about how all the listed ingredients really make their dishes amazing but honestly you just need to go.
+   (other) i : 1.508
+   (other) length : 1.508
+   (other) ingredients : 1.508
+   (food) dishes : 1.508
+   (None) you : 1.508
+a bit outside of downtown montreal but take the metro out and it's less than a 10 minute walk from the station.
+   (other) montreal : -0.246
+   (other) metro : -0.246
+   (None) it : -0.246
+   (other) walk : -0.246
+   (service) station : -0.246
+
+
+----------------------------
+Original text: 
+Lester's is located in a beautiful neighborhood and has been there since 1951. They are known for smoked meat which most deli's have but their brisket sandwich is what I come to montreal for. They've got about 12 seats outside to go along with the inside. 
+
+The smoked meat is up there in quality and taste with Schwartz's and you'll find less tourists at Lester's as well.
+----------------------------
+lester's is located in a beautiful neighborhood and has been there since 1951. they are known for smoked meat which most deli's have but their brisket sandwich is what i come to montreal for.
+   (other) lester : 0.813
+   (other) neighborhood : 0.813
+   (None) they : 0.813
+   (food) meat : 0.813
+   (food) deli : 0.813
+   (food) sandwich : 0.813
+   (None) what : 0.813
+   (other) i : 0.813
+they've got about 12 seats outside to go along with the inside.
+   (None) they : 0.059
+   (food) seats : 0.059
+   (None) inside : 0.059
+the smoked meat is up there in quality and taste with schwartz's and you'll find less tourists at lester's as well.
+   (food) meat : 0.43
+   (food) quality : 0.43
+   (other) taste : 0.43
+   (other) schwartz : 0.43
+   (None) you : 0.43
+   (other) tourists : 0.43
+   (other) lester : 0.43
+
+
+----------------------------
+Original text: 
+Love coming here. Yes the place always needs the floor swept but when you give out  peanuts in the shell how won't it always be a bit dirty. 
+
+The food speaks for itself, so good. Burgers are made to order and the meat is put on the grill when you order your sandwich. Getting the small burger just means 1 patty, the regular is a 2 patty burger which is twice the deliciousness. 
+
+Getting the Cajun fries adds a bit of spice to them and whatever size you order they always throw more fries (a lot more fries) into the bag.
+----------------------------
+love coming here.
+   (other) love : 0.259
+yes the place always needs the floor swept but when you give out  peanuts in the shell how won't it always be a bit dirty.
+   (food) place : -0.551
+   (other) floor : -0.551
+   (None) you : -0.551
+   (food) peanuts : -0.551
+   (other) shell : -0.551
+   (None) it : -0.551
+the food speaks for itself, so good.
+   (food) food : 0.571
+   (None) itself : 0.571
+burgers are made to order and the meat is put on the grill when you order your sandwich.
+   (food) burgers : 0.135
+   (food) meat : 0.135
+   (other) grill : 0.135
+   (None) you : 0.135
+   (food) sandwich : 0.135
+getting the small burger just means 1 patty, the regular is a 2 patty burger which is twice the deliciousness.
+   (food) burger : -0.12
+   (food) patty : -0.12
+   (food) burger : -0.12
+   (other) deliciousness : -0.12
+getting the cajun fries adds a bit of spice to them and whatever size you order they always throw more fries (a lot more fries) into the bag.
+   (other) fries : -0.203
+   (other) bit : -0.203
+   (food) spice : -0.203
+   (None) them : -0.203
+   (other) size : -0.203
+   (None) you : -0.203
+   (None) they : -0.203
+   (other) fries : -0.203
+   (other) bag : -0.203
+
+
+----------------------------
+Original text: 
+Had their chocolate almond croissant and it was amazing! So light and buttery and oh my how chocolaty.
+
+If you're looking for a light breakfast then head out here. Perfect spot for a coffee\/latté before heading out to the old port
+----------------------------
+had their chocolate almond croissant and it was amazing!
+   (food) croissant : 0.477
+   (None) it : 0.477
+so light and buttery and oh my how chocolaty.
+   (other) buttery : -0.04
+if you're looking for a light breakfast then head out here.
+   (None) you : 0.011
+   (other) breakfast : 0.011
+perfect spot for a coffee\/latté before heading out to the old port
+   (price) spot : 0.724
+   (other) coffee\/latté : 0.724
+   (food) port : 0.724
+
+

@@ -1,11 +1,11 @@
-import nltk
+import nltk, spacy
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 from nltk.corpus import sentiwordnet
 from nltk import sent_tokenize, word_tokenize, pos_tag
 
 nltk.download('sentiwordnet')
-
+nlp = spacy.load("en_core_web_sm")
 lemmatizer = WordNetLemmatizer()
 
 def printDebug(debug, msg, end_msg=None):
@@ -23,10 +23,11 @@ def getWordNetTag(tag):
         return wordnet.VERB
     return None
 
-def sentiWordNet(text, included_pos=['J', 'R', 'V'], debug=True):
-    included_pos = [getWordNetTag(tag) for tag in included_pos] # convert to wordnet tags
-    included_pos = [tag for tag in included_pos if tag]         # remove None
-    raw_sentences = sent_tokenize(text)
+
+def sentiWordNet(text, included_pos=['J', 'R', 'V', 'N'], debug=True):
+    included_pos = [getWordNetTag(tag) for tag in included_pos]  # convert to wordnet tags
+    included_pos = [tag for tag in included_pos if tag]  # remove None
+    raw_sentences = sent_tokenize(text.lower())
     sentiment = 0
     tokens_count = 0
 
@@ -34,10 +35,15 @@ def sentiWordNet(text, included_pos=['J', 'R', 'V'], debug=True):
     printDebug(debug, "---")
 
     for raw_sentence in raw_sentences:
-        tokenized = [tok for tok in word_tokenize(raw_sentence) if tok.isalnum()]
-        tagged_sentence = pos_tag(tokenized)
+        # tokenized = [tok for tok in word_tokenize(raw_sentence) if tok.isalnum()]
+        # tagged_sentence = pos_tag(tokenized)
 
+        doc = nlp(raw_sentence)
+
+        # printDebug(debug, tagged_sentence)
         printDebug(debug, raw_sentence)
+        tagged_sentence = [(tok.text, tok.tag_) for tok in doc]
+        printDebug(debug, tagged_sentence)
 
         for word, tag in tagged_sentence:
             wntag = getWordNetTag(tag)
@@ -53,19 +59,22 @@ def sentiWordNet(text, included_pos=['J', 'R', 'V'], debug=True):
             if not synsets:
                 continue
 
-            synset = synsets[0]
-            senti_synset = sentiwordnet.senti_synset(synset.name())
-            word_sent = senti_synset.pos_score() - senti_synset.neg_score()
+            total_sent = 0
+            for syn in synsets:
+                senti_synset = sentiwordnet.senti_synset(syn.name())
+                total_sent += senti_synset.pos_score() - senti_synset.neg_score()
+                printDebug(debug, "syn=" + syn.name() + " : senti(pos)=" + str(
+                    senti_synset.pos_score()) + " senti(neg): " + str(senti_synset.neg_score()))
+            avg_sent = total_sent / len(synsets)
 
             printDebug(debug, "word=" + word, ", ")
             printDebug(debug, "wntag=" + wntag, ", ")
             printDebug(debug, "lemma=" + lemma, ", ")
             printDebug(debug, "synsets=" + synsets[0].name(), ", ")
-            printDebug(debug, "senti(pos)=" + str(senti_synset.pos_score()) + " senti(neg): " + str(senti_synset.neg_score()), ", ")
-            printDebug(debug, "total_senti=" + str(word_sent))
+            printDebug(debug, "total_senti=" + str(avg_sent))
 
-            if word_sent != 0:
-                sentiment += word_sent
+            if avg_sent != 0:
+                sentiment += avg_sent
                 tokens_count += 1
 
         printDebug(debug, "")
@@ -74,29 +83,3 @@ def sentiWordNet(text, included_pos=['J', 'R', 'V'], debug=True):
     printDebug(debug, "num_tokens=" + str(tokens_count))
     printDebug(debug, "total_senti=" + str(sentiment))
     return sentiment
-
-import glob, os
-
-samples = []
-
-# os.chdir("./samples")
-# for file in glob.glob("*.txt"):
-#     f = open(file, 'r')
-#     text = f.readlines()
-#     samples.append("".join(text))
-#
-# print(samples[0])
-# sentiWordNet(samples[0])
-
-# def sentimentHuLiu():
-#     path = os.path.join(os.path.dirname(__file__), "..\\data\\opinion-lexicon-English\\negative-words.txt")
-#     f = open(path)
-#     neg_words = f.readlines()
-#     f.close()
-#     neg_words = [word for word in neg_words if not word[0] == ';']
-#
-#     for word in neg_words:
-#         score = sentiWordNet(word, included_pos=['J', 'R', 'V', 'N'])
-#         print(word, ": ", score)
-#
-# sentimentHuLiu()

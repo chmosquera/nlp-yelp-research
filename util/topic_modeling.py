@@ -323,32 +323,6 @@ def applyLDAModel():
     df_dominant_topic.head(10)
     df_dominant_topic.to_csv("lda_results.csv")
 
-
-# def applyLDAModel():
-#     fileName = 'pickles/yelp_25k-01_06_2020-10_01.csv'
-#     data = pd.read_csv(fileName)
-#
-#     # Tokenize words and clean-up text
-#     samples = data.text
-#     tokenized = data.tokens
-#     lemmatized = data.lemma
-#     phrase_pairs = data.phrase_pairs
-#
-#     phrases = [[phrase.lower() for phrase,label in pair] for pair in phrase_pairs]
-#
-#     id2word = corpora.Dictionary(phrases)
-#     corpus = [id2word.doc2bow(text) for text in phrases]      # token2id : token -> tokenid; id2token : reverse mapping of token2id; doc2bow : convert doc to bag of words
-#
-#     df_topic_sents_keywords = format_topics_sentences(ldamodel=_lda_model, corpus=corpus, texts=samples)
-#
-#     # Format
-#     df_dominant_topic = df_topic_sents_keywords.reset_index()
-#     df_dominant_topic.columns = ['Document_No', 'Dominant_Topic', 'Topic_Perc_Contrib', 'Keywords', 'Text']
-#
-#     # Show
-#     df_dominant_topic.head(10)
-#     df_dominant_topic.to_csv("lda_results.csv")
-
 # TRIGRAM_MODEL_PATH = "./models/my_bigram_model.pkl"
 BIGRAM_MODEL_PATH = "../models/my_bigram_model.pkl"
 LDA_MODEL_PATH = "../models/"

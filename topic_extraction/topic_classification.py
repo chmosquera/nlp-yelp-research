@@ -1,37 +1,38 @@
 import nltk, os
-from nltk import Tree
-from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 lemmatizer = WordNetLemmatizer()
-from topic_extraction.topic_classification_model import YelpTopicClassification
+import spacy
+nlp = spacy.load("en_core_web_sm")
 
 
-def loadData(self):
-    global FOOD_VOCAB, ATMSOSPHERE_VOCAB, SERVE_VOCAB, PRICE_VOCAB
+def loadData():
+    global FOOD_VOCAB, ATMOSPHERE_VOCAB, SERVICE_VOCAB, PRICE_VOCAB
     path = os.path.join(os.path.dirname(__file__), "..\\data\\foods.txt")
+    print(path)
     data = open(path)
     FOOD_VOCAB = data.readlines()[0].split(',')
-    FOOD_VOCAB = list(set(self.food_vocab))
+    FOOD_VOCAB = list(set(FOOD_VOCAB))
     data.close()
 
     path = os.path.join(os.path.dirname(__file__), "..\\data\\atmosphere.txt")
     data = open(path)
     ATMSOSPHERE_VOCAB = data.readlines()[0].split(',')
-    ATMSOSPHERE_VOCAB = list(set(self.atmosphere_vocab))
+    ATMSOSPHERE_VOCAB = list(set(ATMSOSPHERE_VOCAB))
     data.close()
 
     path = os.path.join(os.path.dirname(__file__), "..\\data\\service.txt")
     data = open(path)
-    SERVE_VOCAB = data.readlines()[0].split(',')
-    SERVE_VOCAB = list(set(self.service_vocab))
+    SERVICE_VOCAB = data.readlines()[0].split(',')
+    SERVICE_VOCAB = list(set(SERVICE_VOCAB))
     data.close()
 
     path = os.path.join(os.path.dirname(__file__), "..\\data\\price.txt")
     data = open(path)
     PRICE_VOCAB = data.readlines()[0].split(',')
-    PRICE_VOCAB = list(set(self.price_vocab))
+    PRICE_VOCAB = list(set(PRICE_VOCAB))
     data.close()
+
 
 def getWordnetPOS(treebank_tag):
     if treebank_tag.startswith('J'):
@@ -45,13 +46,6 @@ def getWordnetPOS(treebank_tag):
     else:
         return None
 
-def filterTokens(tokenized):
-    filtered = []
-    for token in tokenized:
-        if token.isalpha() and token.lower() not in stopwords.words('english'):
-            filtered.append(token)  # deacc=True removes punctuations
-    return filtered
-
 def lemmatize(tagged):
     lemmas = []
     for token,tag in tagged:
@@ -61,89 +55,90 @@ def lemmatize(tagged):
     return lemmas
 
 
-def extractPhrases2(review):
-    tokenized = nltk.word_tokenize(review.lower())
-    tagged = nltk.pos_tag(tokenized)
+def aspectOpinionPair(sentence):
+    doc = nlp(sentence)
+    pairs = []
 
-    grammar = r"""
-      NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
-      PP: {<IN><NP>}               # Chunk prepositions followed by NP
-      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP>} # Chunk verbs and their arguments
-      # CLAUSE: {<NP><VP>}           # Chunk NP, VP
-      """
-    chunker = nltk.RegexpParser(grammar)
-    tree = chunker.parse(tagged)
-    firstTime = True
-    # for subtree in tree.subtrees():
-    Tree.fromstring(str(tree)).pretty_print()
+    # don't include words we've already seen. (Some subjects share predicates)
+    history = []
 
-def regexChunker(sentence):
-    grammar = r"""
-      NP: {<DT>?<JJ>*<NN|NN|NNP|NNPS>}          # Chunk sequences of DT, JJ, NN
-      PP: {<IN><NP>}               # Chunk prepositions followed by NP
-      VP: {<VB|VBG|VBD|VBN|VBP|VBZ.*><NP|PP>} # Chunk verbs and their arguments
-      # CLAUSE: {<NP><VP>}           # Chunk NP, VP
-      """
-    chunked = nltk.RegexpParser(grammar)
-    return chunked.parse(sentence)
+    # every pair needs a subject
+    for chunk in doc.noun_chunks:
+        noun = chunk.root
+        relevant_words = []
 
-# Takes a list of lemmatized tokens, returns a list of (text, grammar label) pairs of phrases
-def extractPhrases(review, debug=False):
-    tokenized = nltk.word_tokenize(review)
-    tagged = nltk.pos_tag(tokenized)
-    tree = regexChunker(tagged)
-    phrases = []
-    for subtree in tree.subtrees():
-        if subtree.label() in ["NP", "PP", "VP", "CLAUSE", "NOUN"]:
-            p = " ".join([tag[0] for tag in subtree.leaves()])
-            # print(p, subtree.label())
-            phrases.append((p,subtree.label()))
-    return phrases
+        # Find modifiers describing the noun
+        MODS = ['amod', 'advmod']
+        relevant_words.extend([child for child in chunk.root.children if child.dep_ in MODS])
 
-def extractTopics(review):
-    # preprocess raw text
-    tokenized = nltk.word_tokenize(review)
-    filtered = filterTokens(tokenized)
-    tagged = nltk.pos_tag(filtered)
-    print("tagged: ", tagged)
+        # Find any predicates of this subject (verbs)
+        predicate = ""
+        pred_children = []
+        if str(chunk.root.head.tag_).startswith('V') and chunk.root.head not in history:
+            predicate = chunk.root.head
+            relevant_words.append(predicate)
+            relevant_words.extend([child for child in predicate.children if not child == chunk.root if child.text])
+            history.append(predicate)
 
-    noun_tags = []
-    for tok,tag in tagged:
-        if tag.startswith('N'):
-            noun_tags.append((tok,tag))
+        pairs.append((noun.text, relevant_words, assignTopic(noun.text)))
+    return pairs
 
-    print("nouns: ", noun_tags)
-    lemma_nouns = lemmatize(noun_tags)
+def assignTopic(word):
+    global FOOD_VOCAB, ATMOSPHERE_VOCAB, SERVICE_VOCAB, PRICE_VOCAB
+    tagged = nltk.pos_tag([word])
+    wntag = getWordnetPOS(tagged[0][1])
+    if wntag is None:
+        return None
+    lemma = lemmatizer.lemmatize(word, pos=wntag)
+    # print(word, tagged, lemma, wntag)
 
-    # Also add nouns from the noun phrases (some nouns are only detected in noun phrases)
-    phrases = extractPhrases(review)
-    for phrase,tag in phrases:
-        # underscore = "_".join(phrase.split())
-        # Check if any of the words in the phrase are nouns
-        lemma_nouns.extend(phrase.split())
-    print("phrases: ", phrases)
+    syns = wordnet.synsets(lemma)
 
-    lemma_nouns = list(set(lemma_nouns))    # no duplicates
-    print("lemma_nouns: ", lemma_nouns)
+    # build a list of synonyms to match the word to
+    synonyms = []
+    for syn in syns:
+        possible_syns = []
+        possible_syns.extend([l.name() for l in syn.lemmas()])
+        possible_syns.extend([h.lemmas()[0].name() for h in syn.hyponyms()])
+        possible_syns.extend([h.lemmas()[0].name() for h in syn.hypernyms()])
 
-    # check the nouns against our bow for each topic
-    topics = []
-    for noun in lemma_nouns:
-        noun = noun.lower()
-        if noun in FOOD_VOCAB:
-            topics.append((noun, "<FOOD>"))
-        if noun in ATMOSPHERE_VOCAB:
-            topics.append((noun, "<ATMSOSPHERE>"))
-        if noun in PRICE_VOCAB:
-            topics.append((noun, "<PRICE>"))
-        if noun in SERVICE_VOCAB:
-            topics.append((noun, "<SERVICE>"))
+        synonyms.append((syn,possible_syns))
+    # print(synonyms)
 
-    return topics
+    # the word might appear in a few categories, get the one that has the highest score
+    score = {
+        'food':0,
+        'atmosphere':0,
+        'service':0,
+        'price':0,
+        'other':0
+    }
+    for syn,possible_syns in synonyms:
+        for s in possible_syns:         # search until one of the words can be categorized
+            s = s.lower()
+            if s in FOOD_VOCAB:
+                score['food'] += 1
+                continue
+            if s in ATMOSPHERE_VOCAB:
+                score['atmosphere'] += 1
+                continue
+            if s in PRICE_VOCAB:
+                score['price'] += 1
+                continue
+            if s in SERVICE_VOCAB:
+                score['service'] += 1
+                continue
 
+    max_topic = 'other'
+    for key,val in score.items():
+        if val > score[max_topic]:
+            max_topic = str(key)
+
+    return max_topic
 
 def main():
     loadData()
+    print(assignTopic('place'))
 
 
 # Global vars
@@ -154,14 +149,3 @@ PRICE_VOCAB = []
 
 if __name__ == '__main__':
     main()
-
-# print(samples[2])
-# topics = extractTopics(samples[2])
-# print("TOPICS: \n")
-# print(topics)
-
-## Test
-# samples =
-# extractPhrases2(samples[0])
-# topics = extractTopics(samples[0])
-# print(topics)
