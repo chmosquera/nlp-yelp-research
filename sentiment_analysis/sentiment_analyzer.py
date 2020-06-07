@@ -3,10 +3,18 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 from nltk.corpus import sentiwordnet
 from nltk import sent_tokenize, word_tokenize, pos_tag
-
+from datetime import datetime
 nltk.download('sentiwordnet')
 nlp = spacy.load("en_core_web_sm")
 lemmatizer = WordNetLemmatizer()
+
+def log(lines):
+    now = datetime.now()
+    dt_string = now.strftime("-%d_%m_%Y-%H_%M")
+    f = open("./logs/sentiment_analyzer.txt", 'w+')
+    for line in lines:
+        f.write(line + "\n")
+    f.close()
 
 def printDebug(debug, msg, end_msg=None):
     if debug:

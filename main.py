@@ -6,11 +6,9 @@ from sentiment_analysis import sentiment_analyzer as SA
 nltk.download('sentiwordnet')
 from datetime import datetime
 
-def loadData(fileName = None):
+def loadData(fileName='yelp-dataset/yelp_25k.csv'):
     global _df
     ## Import Dataset, restaurants only
-    if fileName is None:
-        fileName = 'yelp-dataset/yelp_25k.csv'
 
     _df = pd.read_csv(fileName)
     restaurants = _df[_df['categories'].str.contains("Restaurants")]
