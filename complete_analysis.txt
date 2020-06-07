@@ -1,0 +1,18 @@
+###########################################################
+review:: My boyfriend and I come here regularly. It started because I live down the street, but we became regulars because of the service. They are always so quick and kind. If there is a wait for a table, it is always quicker than they promise. The food is also amazing. It's very consistent, which can be difficult in sushi places. We love it here. Also, the server Mauri is our favorite
+###########################################################
+FOOD (0.375),ATMS (0.0),SERV (0.0),PRCE (0)
++------------------------------------------------+-----------+------------+-------+--------------+
+|                    sentence                    |    subj   | sent_score | topic |  sim_score   |
++------------------------------------------------+-----------+------------+-------+--------------+
+|   come boyfriend My and I  here regularly .    | boyfriend |    0.5     |  FOOD |  0.4853471   |
+|               down street the                  |   street  |    0.0     |  ATMS |  0.5488419   |
+| became we regulars because of service the   .  |  regulars |    0.0     |  SERV |  0.52837235  |
+|            because of service the              |  service  |    0.0     |  SERV |  0.5940287   |
+|       is If there wait a for table a           |    wait   |    0.0     |  SERV |  0.53277224  |
+|                 for table a                    |   table   |    0.0     |  FOOD |  0.60689753  |
+|          is food The  also amazing .           |    food   |   -0.125   |  FOOD |     1.0      |
+|               in places sushi                  |   places  |    0.0     |  ATMS |  0.7610931   |
+|   is Also , server the Mauri  favorite our     |   server  |    0.0     |  SERV |     1.0      |
+|               server the Mauri                 |   Mauri   |    0.0     |  ATMS | -0.014699131 |
++------------------------------------------------+-----------+------------+-------+--------------+

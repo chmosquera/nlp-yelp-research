@@ -24,8 +24,9 @@ ATMS_SEEDS = "atmosphere place environment"
 SERV_SEEDS = "server management time"
 PRCE_SEEDS = "money expensive"
 
-def casualTokenize(raw_sentence, preserve_case=False):
-  return casual_tokenize(raw_sentence, preserve_case=preserve_case, reduce_len=True)
+######################################################################
+#   Data, Tools
+######################################################################
 
 def loadData(fileName='yelp-dataset/yelp_25k.csv'):
     global _df
@@ -35,8 +36,27 @@ def loadData(fileName='yelp-dataset/yelp_25k.csv'):
     restaurants = _df[_df['categories'].str.contains("Restaurants")]
     foods = _df[_df['categories'].str.contains("Food")]
     _df = pd.concat([restaurants, foods])
+    _df = _df.drop_duplicates()
+    _df.set_index("review_id", inplace=True)
 
     return _df
+
+# gets a random review (review_id,text)
+def randReview():
+    while True:
+        try:
+            review_id = random.choice(_df.index)
+            break
+        except KeyError:
+            print("Oops!  Couldn't get a random review. Try again...")
+    return (review_id, _df.loc[review_id].text)
+
+
+def condenseReview(review):
+    return review.replace("\n", " ")
+
+def casualTokenize(raw_sentence, preserve_case=False):
+  return casual_tokenize(raw_sentence, preserve_case=preserve_case, reduce_len=True)
 
 
 def getWordnetPOS(treebank_tag):
@@ -162,6 +182,9 @@ def sentiWordNet(sentence, debug=True):
     return total_sentiment
 
 
+# Unresolved coreferencing issue
+# In the meantime, don't include these stop nouns
+STOP_NOUNS = ["i", "me", "we", "they", "it"]
 def aspectSentimentCalculation(review):
     # 1. Get noun chunks and other, rebuild sentences
     subj_senti = []
@@ -173,14 +196,50 @@ def aspectSentimentCalculation(review):
 
     # Calculate sentiment on each rebuilt sentence
     for subj,sentence in subject_sentences:
-        # print(sentence)
-        score = sentiWordNet(sentence, debug=False)
-        subj_senti.append((subj,score))
+        if subj.lower() not in STOP_NOUNS:
+            # print(sentence)
+            score = sentiWordNet(sentence, debug=False)
+            subj_senti.append((subj,score,sentence))
 
     return subj_senti
 
 
-##
+######################################################################
+#   Topic Classification
+######################################################################
+def maxScore(food_score, atms_score, serv_score, prce_score):
+
+    # each dict of scores contains multiple scores, depending on the # of seed words per topic
+    # we want the max score for each topic
+    food_max_sc = [(k, v) for k, v in sorted(food_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    atms_max_sc = [(k, v) for k, v in sorted(atms_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    serv_max_sc = [(k, v) for k, v in sorted(serv_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    prce_max_sc = [(k, v) for k, v in sorted(prce_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+
+    max_scores = [("FOOD", food_max_sc),
+              ("ATMS", atms_max_sc),
+              ("SERV", serv_max_sc),
+              ("PRCE", prce_max_sc)]
+
+    # sort the list of max scores and return the topic with the highest score
+    most_similar_topic = [(k, v) for k, v in sorted(max_scores, key=lambda item: item[1], reverse=True)][0]
+
+    return most_similar_topic
+
+def yelpSimilarities(review, nouns):
+    global FOOD_SEEDS, ATMS_SEEDS, SERV_SEEDS, PRCE_SEEDS
+
+    # calculate scores for all the nouns for each possible topic
+    food_sims = analyzeS2VSimilarity(FOOD_SEEDS, review, nouns, log_to="food_similarity_vectors.txt")
+    atms_sims = analyzeS2VSimilarity(ATMS_SEEDS, review, nouns, log_to="atms_similarity_vectors.txt")
+    serv_sims = analyzeS2VSimilarity(SERV_SEEDS, review, nouns, log_to="serv_similarity_vectors.txt")
+    prce_sims = analyzeS2VSimilarity(PRCE_SEEDS, review, nouns, log_to="prce_similarity_vectors.txt")
+    assigned_topics = []
+    for i in range(len(nouns)):
+        most_similar_topic = maxScore(food_sims[i],atms_sims[i],serv_sims[i],prce_sims[i])
+        assigned_topics.append((nouns[i], most_similar_topic))
+    return assigned_topics
+
 def analyzeS2VSimilarity(compare_to, sentence, words, use_s2v=True, log_to="s2v_similarity_vectors.txt"):
     logdata = []
     logdata.append("===============================================")
@@ -194,14 +253,19 @@ def analyzeS2VSimilarity(compare_to, sentence, words, use_s2v=True, log_to="s2v_
     sentence = nlp(sentence)
     # convert words to spacy tokens from the sentence
     words = [tok for tok in sentence for w in words if w == tok.text]
+    print(compare_to)
+    print(sentence)
+    print(words)
 
     result = []
 
     TT = PrettyTable(['word'] + [tok for tok in compare_to])
 
     for tok2 in words:
+        print("tok2: ", tok2)
         # Use sv2 vectors
         if use_s2v and (tok2._.in_s2v or tok2.has_vector):
+            print("made it here")
             row = []
             score_dict = {}
             for tok1 in compare_to:
@@ -247,17 +311,57 @@ def analyzeS2VSimilarity(compare_to, sentence, words, use_s2v=True, log_to="s2v_
         save.close()
 
     return result
-#
-#
-# loadData()
 
-##
+
+#########################
+# Summarizing Results
+#########################
+
+def summarizeResults(topics_sentiments, categories=["FOOD","ATMS","SERV","PRCE"]):
+    scores = {c:0 for c in categories}
+    for topic,sentiment in topics_sentiments:
+        scores[topic] += sentiment
+
+    if not len(scores) == len(categories):
+        print("Error Mismatch: Assigned topics don't match given categories. Extra topics include: ", list(scores)[len(categories):])
+        return "Error: no summary given"
+
+    return ",".join([topic + " (" + str(score) + ")" for topic,score in scores.items()])
+
+#########################
+# Example of pipeline
+#########################
 loadData()
-ex = random.choice(_df['text'])
-print(ex)
-subj_senti = aspectSentimentCalculation(ex)
-print(subj_senti)
-subj = [s for s,senti in subj_senti]
 
-food_sims = analyzeS2VSimilarity(FOOD_SEEDS, ex, subj)
-atms_sims = analyzeS2VSimilarity(ATMS_SEEDS, ex, subj)
+# Get a random (review_id, text)
+ex = randReview()
+
+LOGDATA = []
+LOGDATA.append("###########################################################")
+LOGDATA.append("review:: " + condenseReview(ex[1]))
+LOGDATA.append("###########################################################")
+TT = PrettyTable(["sentence", "subj", "sent_score", "topic", "sim_score"])
+
+nouns_sentiments = aspectSentimentCalculation(ex[1])
+nouns = [s for s,senti,sentence in nouns_sentiments]
+assigned_topics = yelpSimilarities(ex[1],nouns)
+
+temp_join = list(zip(nouns_sentiments, assigned_topics))
+subj_topic_sentiment = []   # (phrase, subject, sentiment, assigned topic, similarity score)
+summary_tup = []                # (topic, sentiment)
+for ns,at in temp_join:
+    if not ns[0] == at[0]:
+        print("Error Mismatch: Trying to join subject/sentiment with subject/topic. Subject '" + ns[0] + "' does not match '" + at[0] + "'")
+        continue
+    # add row: phrase, subject, sentiment, assigned topic, similarity score
+    subj_topic_sentiment.append((ns[2], ns[0], ns[1], at[1][0], at[1][1]))
+    summary_tup.append((at[1][0], ns[1]))
+    TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
+
+LOGDATA.append(summarizeResults(summary_tup))
+LOGDATA.append(TT.get_string())
+
+# save file
+save = open("complete_analysis.txt", 'a+')
+save.writelines('\n'.join(LOGDATA) + '\n')
+save.close()

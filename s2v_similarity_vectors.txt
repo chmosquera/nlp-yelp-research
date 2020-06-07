@@ -1372,3 +1372,26 @@ Maybe I have been spoiled by the awesomeness that is Chase's Diner in Chandler, 
 |  burger | 0.6714058  | 0.6616204  |
 |    BO   | 0.12116223 | 0.1870529  |
 +---------+------------+------------+
+===============================================
+## Similarity Analysis (use_s2v=True)
+## compare_to: f, o, o, d,  , d, r, i, n, k
+## sentence: 
+Mediocre chain diner with around Denny's quality or slightly lower food.  I guess the big appeal is their hours?
+Maybe I have been spoiled by the awesomeness that is Chase's Diner in Chandler, but there's really no reason for me to ever go here again.
+
+===============================================
++-------------+-------------+-------------+
+|     word    |     food    |    drink    |
++-------------+-------------+-------------+
+|    chain    |  0.35270077 |  0.32736143 |
+|   quality   |  0.42049026 |  0.25319222 |
+|      I      |  0.29509228 |  0.34300986 |
+|    appeal   |  0.20280121 |  0.24582252 |
+|    hours    |  0.3732722  |  0.34585872 |
+|      I      |  0.29509228 |  0.34300986 |
+| awesomeness |  0.33147493 |  0.34318036 |
+|    Diner    |  0.4864095  |  0.39306447 |
+|   Chandler  | 0.115466975 | 0.062678814 |
+|    reason   |  0.3579144  |  0.27284676 |
+|      me     |  0.3010881  |  0.41327012 |
++-------------+-------------+-------------+

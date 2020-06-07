@@ -19,21 +19,24 @@ def  casualTokenize(raw_sentence, preserve_case=False):
   return casual_tokenize(raw_sentence, preserve_case=preserve_case, reduce_len=True)
 
 
-def maxSimScore(subj_similarity_scores):
+def maxScore(food_score, atms_score, serv_score, prce_score):
 
-    scores = []
-    for subj,score_dict in subj_similarity_scores:
-        sorted_scores = [(k, v) for k, v in sorted(score_dict.items(), key=lambda item: item[1], reverse=True)]
-        max = sorted_scores[0][1]   # element 0 has highest score 1
-        print(subj, max)
+    # each dict of scores contains multiple scores, depending on the # of seed words per topic
+    # we want the max score for each topic
+    food_max_sc = [(k, v) for k, v in sorted(food_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    atms_max_sc = [(k, v) for k, v in sorted(atms_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    serv_max_sc = [(k, v) for k, v in sorted(serv_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
+    prce_max_sc = [(k, v) for k, v in sorted(prce_score[1].items(), key=lambda item: item[1], reverse=True)][0][1]
 
-        # similarity score threshold
-        if max > 0.425:
-            scores.append((subj, max))
+    max_scores = [("FOOD", food_max_sc),
+              ("ATMS", atms_max_sc),
+              ("SERV", serv_max_sc),
+              ("PRCE", prce_max_sc)]
 
-    print(scores)
-    return scores
+    # sort the list of max scores and return the topic with the highest score
+    most_similar_topic = [(k, v) for k, v in sorted(max_scores, key=lambda item: item[1], reverse=True)][0]
 
+    return most_similar_topic
 
 def yelpSimilarities(review, nouns):
     global FOOD_SEEDS, ATMS_SEEDS, SERV_SEEDS, PRCE_SEEDS
@@ -41,18 +44,13 @@ def yelpSimilarities(review, nouns):
     # calculate scores for all the nouns for each possible topic
     food_sims = analyzeS2VSimilarity(FOOD_SEEDS, review, nouns, log_to="food_similarity_vectors.txt")
     atms_sims = analyzeS2VSimilarity(ATMS_SEEDS, review, nouns, log_to="atms_similarity_vectors.txt")
-    serv_sims = analyzeS2VSimilarity(SERV_SEEDS, review, nouns, log_to="servsimilarity_vectors.txt")
+    serv_sims = analyzeS2VSimilarity(SERV_SEEDS, review, nouns, log_to="serv_similarity_vectors.txt")
     prce_sims = analyzeS2VSimilarity(PRCE_SEEDS, review, nouns, log_to="prce_similarity_vectors.txt")
+    assigned_topics = []
     for i in range(len(nouns)):
-        scores = [("FOOD", food_sims[i]),
-                  ("ATMS", atms_sims[i]),
-                  ("SERV", serv_sims[i]),
-                  ("PRCE", prce_sims[i])]
-
-        # the topic with the highest avg score is the assigned topic
-        sorted_scores = [(k, v) for k, v in sorted(scores, key=lambda item: item[1], reverse=True)]
-        print(nouns[i], sorted_scores)
-
+        most_similar_topic = maxScore(food_sims[i],atms_sims[i],serv_sims[i],prce_sims[i])
+        assigned_topics.append((nouns[i], most_similar_topic))
+    return assigned_topics
 
 def analyzeS2VSimilarity(compare_to, sentence, words, use_s2v=True, log_to="s2v_similarity_vectors.txt"):
     logdata = []
