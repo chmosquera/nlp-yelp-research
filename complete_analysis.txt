@@ -16,3 +16,21 @@ FOOD (0.375),ATMS (0.0),SERV (0.0),PRCE (0)
 |   is Also , server the Mauri  favorite our     |   server  |    0.0     |  SERV |     1.0      |
 |               server the Mauri                 |   Mauri   |    0.0     |  ATMS | -0.014699131 |
 +------------------------------------------------+-----------+------------+-------+--------------+
+###########################################################
+review:: Definitely better than the R&T north of I-10.  The service is so-so but the food is delicious.  I like their fajitas.  I'm still waiting for the "perfect" Mexican food place on our side of town but this will do until then!  I rated both location 3 stars.  Although the food is better here, I think their service lacks.  It's not horrible, just not very good.
+###########################################################
+FOOD (0.0),ATMS (0.875),SERV (0.5),PRCE (0)
++-----------------------------------------------------------------+----------+------------+-------+------------+
+|                             sentence                            |   subj   | sent_score | topic | sim_score  |
++-----------------------------------------------------------------+----------+------------+-------+------------+
+|                     than north the R&T of                       |  north   |    0.0     |  ATMS | 0.48524207 |
+|                    is service The  so so -                      | service  |    0.0     |  SERV | 0.5940287  |
+|                 is but food the  delicious .                    |   food   |    0.5     |  SERV | 0.5940287  |
+|                   like I fajitas their  .                       | fajitas  |    0.0     |  FOOD |    1.0     |
+| for place the " perfect " Mexican food on side our of town      |  place   |    0.0     |  FOOD |    1.0     |
+|                      on side our of town                        |   side   |    0.0     |  FOOD | 0.5960056  |
+|                             of town                             |   town   |    0.0     |  FOOD |    1.0     |
+|              rated I location both  stars 3  .                  | location |    0.0     |  FOOD |    1.0     |
+|                is Although food the  better here                |   food   |   0.875    |  ATMS |    1.0     |
+|                      lacks service their                        | service  |    0.0     |  ATMS | 0.5541131  |
++-----------------------------------------------------------------+----------+------------+-------+------------+

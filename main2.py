@@ -82,6 +82,10 @@ def spacyToNltkTree(node):
         return node.orth_
 
 def nltkTreeToString(root):
+    if type(root) is not nltk.Tree:
+        return root
+
+    print("root: ", root, type(root) is nltk.Tree)
     S = root.label() + " "
     for node in root:
         if type(node) is nltk.Tree:
@@ -141,7 +145,7 @@ def calculateSentiment(pos, neg, objv):
         return 0.0
     return pos - neg
 
-
+# TODO not getting good sentiment scores
 def sentiWordNet(sentence, debug=True):
     # Used for debugging
     LOGDATA = []
@@ -253,19 +257,14 @@ def analyzeS2VSimilarity(compare_to, sentence, words, use_s2v=True, log_to="s2v_
     sentence = nlp(sentence)
     # convert words to spacy tokens from the sentence
     words = [tok for tok in sentence for w in words if w == tok.text]
-    print(compare_to)
-    print(sentence)
-    print(words)
 
     result = []
 
     TT = PrettyTable(['word'] + [tok for tok in compare_to])
 
     for tok2 in words:
-        print("tok2: ", tok2)
         # Use sv2 vectors
         if use_s2v and (tok2._.in_s2v or tok2.has_vector):
-            print("made it here")
             row = []
             score_dict = {}
             for tok1 in compare_to:
@@ -326,42 +325,102 @@ def summarizeResults(topics_sentiments, categories=["FOOD","ATMS","SERV","PRCE"]
         print("Error Mismatch: Assigned topics don't match given categories. Extra topics include: ", list(scores)[len(categories):])
         return "Error: no summary given"
 
-    return ",".join([topic + " (" + str(score) + ")" for topic,score in scores.items()])
+    return [(topic,score) for topic,score in scores.items()]
+    # return ",".join([topic + " (" + str(score) + ")" for topic,score in scores.items()])
 
 #########################
 # Example of pipeline
 #########################
-loadData()
+def calculateAESO_one():
+    _df = loadData()
 
-# Get a random (review_id, text)
-ex = randReview()
+    # Get a random (review_id, text)
+    ex = randReview()
 
-LOGDATA = []
-LOGDATA.append("###########################################################")
-LOGDATA.append("review:: " + condenseReview(ex[1]))
-LOGDATA.append("###########################################################")
-TT = PrettyTable(["sentence", "subj", "sent_score", "topic", "sim_score"])
+    LOGDATA = []
+    LOGDATA.append("###########################################################")
+    LOGDATA.append("review:: " + condenseReview(ex[1]))
+    LOGDATA.append("###########################################################")
+    TT = PrettyTable(["sentence", "subj", "sent_score", "topic", "sim_score"])
 
-nouns_sentiments = aspectSentimentCalculation(ex[1])
-nouns = [s for s,senti,sentence in nouns_sentiments]
-assigned_topics = yelpSimilarities(ex[1],nouns)
+    nouns_sentiments = aspectSentimentCalculation(ex[1])
+    nouns = [s for s,senti,sentence in nouns_sentiments]
+    assigned_topics = yelpSimilarities(ex[1],nouns)
 
-temp_join = list(zip(nouns_sentiments, assigned_topics))
-subj_topic_sentiment = []   # (phrase, subject, sentiment, assigned topic, similarity score)
-summary_tup = []                # (topic, sentiment)
-for ns,at in temp_join:
-    if not ns[0] == at[0]:
-        print("Error Mismatch: Trying to join subject/sentiment with subject/topic. Subject '" + ns[0] + "' does not match '" + at[0] + "'")
-        continue
-    # add row: phrase, subject, sentiment, assigned topic, similarity score
-    subj_topic_sentiment.append((ns[2], ns[0], ns[1], at[1][0], at[1][1]))
-    summary_tup.append((at[1][0], ns[1]))
-    TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
+    temp_join = list(zip(nouns_sentiments, assigned_topics))
+    subj_topic_sentiment = []   # (phrase, subject, sentiment, assigned topic, similarity score)
+    summary_tup = []                # (topic, sentiment)
+    for ns,at in temp_join:
+        if not ns[0] == at[0]:
+            print("Error Mismatch: Trying to join subject/sentiment with subject/topic. Subject '" + ns[0] + "' does not match '" + at[0] + "'")
+            continue
+        # add row: phrase, subject, sentiment, assigned topic, similarity score
+        subj_topic_sentiment.append((ns[2], ns[0], ns[1], at[1][0], at[1][1]))
+        summary_tup.append((at[1][0], ns[1]))
+        TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
 
-LOGDATA.append(summarizeResults(summary_tup))
-LOGDATA.append(TT.get_string())
+    summary = summarizeResults(summary_tup)
+    LOGDATA.append(topic + " (" + score + ") " for topic,score in summary)
+    LOGDATA.append(TT.get_string())
 
-# save file
-save = open("complete_analysis.txt", 'a+')
-save.writelines('\n'.join(LOGDATA) + '\n')
-save.close()
+    # save file
+    save = open("complete_analysis.txt", 'a+')
+    save.writelines('\n'.join(LOGDATA) + '\n')
+    save.close()
+
+
+def calculateAESO():
+    # Prepare dataframe to save data
+    df = {'review_id': [], 'text': [], 'food_score': [], 'atms_score': [], 'serv_score': [], 'prce_score': []}
+
+    human_scores = loadData()
+
+    for idx, row in human_scores.iterrows():
+        ex = (row['review_id'], row['text'])
+        df['text'].append(row['text'])
+        df['review_id'].append(row['review_id'])
+
+        # ########################
+        # Example of pipeline
+        # ########################
+        LOGDATA = []
+        LOGDATA.append("###########################################################")
+        LOGDATA.append("review:: " + condenseReview(ex[1]))
+        LOGDATA.append("###########################################################")
+        TT = PrettyTable(["sentence", "subj", "sent_score", "topic", "sim_score"])
+
+        nouns_sentiments = aspectSentimentCalculation(ex[1])
+        nouns = [s for s, senti, sentence in nouns_sentiments]
+        assigned_topics = yelpSimilarities(ex[1], nouns)
+
+        temp_join = list(zip(nouns_sentiments, assigned_topics))
+        subj_topic_sentiment = []  # (phrase, subject, sentiment, assigned topic, similarity score)
+        summary_tup = []  # (topic, sentiment)
+        for ns, at in temp_join:
+            if not ns[0] == at[0]:
+                print("Error Mismatch: Trying to join subject/sentiment with subject/topic. Subject '" + ns[
+                    0] + "' does not match '" + at[0] + "'")
+                continue
+            # add row: phrase, subject, sentiment, assigned topic, similarity score
+            subj_topic_sentiment.append((ns[2], ns[0], ns[1], at[1][0], at[1][1]))
+            summary_tup.append((at[1][0], ns[1]))
+            TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
+
+        summary = summarizeResults(summary_tup)
+
+        df['food_score'].append(summary[0][1])
+        df['atms_score'].append(summary[1][1])
+        df['serv_score'].append(summary[2][1])
+        df['prce_score'].append(summary[3][1])
+
+        # LOGDATA.append(topic + " (" + score + ") " for topic,score in summary)
+        # LOGDATA.append(TT.get_string())
+
+        # # save file
+        # save = open("complete_analysis.txt", 'a+')
+        # save.writelines('\n'.join(LOGDATA) + '\n')
+        # save.close()
+
+    # Save to csv
+    system_scores = pd.DataFrame(df)
+    system_scores.to_csv('D:\\OneDrive - California Polytechnic State University\\csc582\\yelp final project\\nltk-yelp-research\data\\results.csv')
