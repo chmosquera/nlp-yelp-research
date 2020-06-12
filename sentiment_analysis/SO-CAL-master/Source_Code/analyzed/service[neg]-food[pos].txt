@@ -1,3 +1,0 @@
-Server/NN was/VBD a/DT little/JJ rude/JJ ./.
-Ordered/VBD the/DT calamari/NN ,/, duck/NN confit/NN poutine/NN and/CC the/DT trout/NNS fish/NN with/IN miso/NN soba/NN -/HYPH all/DT very/RB tasty/JJ ./.
-Definitely/RB not/RB your/PRP$ typical/JJ diner/NN ./.

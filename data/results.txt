@@ -1,6 +1,8 @@
-topic_classification: [[0.74864104]]
+hellotopic_classification: [[0.74864104]]
 topic_classification_s2v: [[0.74873032]]
 sentiment_analysis: [[0.90705349]]
-sentiment_analysis_lesk: [[0.9219316]]
-sentiment_analysis_lesk_bing: [[0.9219316]]
-topic_sentiment: [[0.68950455]]
+sentiment_analysis_lesk: [[0.90737235]]
+sentiment_analysis_lesk_bing: [[0.91331209]]
+sentiment_analysis_vs_socalc: [[0.91750919]]
+topic_sentiment: [[0.69290792]]
+

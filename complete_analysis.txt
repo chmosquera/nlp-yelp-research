@@ -1,95 +1,0 @@
-###########################################################
-review:: My boyfriend and I come here regularly. It started because I live down the street, but we became regulars because of the service. They are always so quick and kind. If there is a wait for a table, it is always quicker than they promise. The food is also amazing. It's very consistent, which can be difficult in sushi places. We love it here. Also, the server Mauri is our favorite
-###########################################################
-FOOD (0.375),ATMS (0.0),SERV (0.0),PRCE (0)
-+------------------------------------------------+-----------+------------+-------+--------------+
-|                    sentence                    |    subj   | sent_score | topic |  sim_score   |
-+------------------------------------------------+-----------+------------+-------+--------------+
-|   come boyfriend My and I  here regularly .    | boyfriend |    0.5     |  FOOD |  0.4853471   |
-|               down street the                  |   street  |    0.0     |  ATMS |  0.5488419   |
-| became we regulars because of service the   .  |  regulars |    0.0     |  SERV |  0.52837235  |
-|            because of service the              |  service  |    0.0     |  SERV |  0.5940287   |
-|       is If there wait a for table a           |    wait   |    0.0     |  SERV |  0.53277224  |
-|                 for table a                    |   table   |    0.0     |  FOOD |  0.60689753  |
-|          is food The  also amazing .           |    food   |   -0.125   |  FOOD |     1.0      |
-|               in places sushi                  |   places  |    0.0     |  ATMS |  0.7610931   |
-|   is Also , server the Mauri  favorite our     |   server  |    0.0     |  SERV |     1.0      |
-|               server the Mauri                 |   Mauri   |    0.0     |  ATMS | -0.014699131 |
-+------------------------------------------------+-----------+------------+-------+--------------+
-###########################################################
-review:: Definitely better than the R&T north of I-10.  The service is so-so but the food is delicious.  I like their fajitas.  I'm still waiting for the "perfect" Mexican food place on our side of town but this will do until then!  I rated both location 3 stars.  Although the food is better here, I think their service lacks.  It's not horrible, just not very good.
-###########################################################
-FOOD (0.0),ATMS (0.875),SERV (0.5),PRCE (0)
-+-----------------------------------------------------------------+----------+------------+-------+------------+
-|                             sentence                            |   subj   | sent_score | topic | sim_score  |
-+-----------------------------------------------------------------+----------+------------+-------+------------+
-|                     than north the R&T of                       |  north   |    0.0     |  ATMS | 0.48524207 |
-|                    is service The  so so -                      | service  |    0.0     |  SERV | 0.5940287  |
-|                 is but food the  delicious .                    |   food   |    0.5     |  SERV | 0.5940287  |
-|                   like I fajitas their  .                       | fajitas  |    0.0     |  FOOD |    1.0     |
-| for place the " perfect " Mexican food on side our of town      |  place   |    0.0     |  FOOD |    1.0     |
-|                      on side our of town                        |   side   |    0.0     |  FOOD | 0.5960056  |
-|                             of town                             |   town   |    0.0     |  FOOD |    1.0     |
-|              rated I location both  stars 3  .                  | location |    0.0     |  FOOD |    1.0     |
-|                is Although food the  better here                |   food   |   0.875    |  ATMS |    1.0     |
-|                      lacks service their                        | service  |    0.0     |  ATMS | 0.5541131  |
-+-----------------------------------------------------------------+----------+------------+-------+------------+
-###########################################################
-review:: Great market with wide variety of spices, olives oils, cheeses, olives, and other Meditteranean foods. The prices are excellent. The owner is very friendly and helpful. It is always a pleasure to shop there, chat with him, and get advice about ingredients for recipes I'm making.
-###########################################################
-FOOD (0)  ATMS (0.125)  SERV (0.25)  PRCE (0.625) 
-+-------------------------------------------------------------------------------------------------------------------------------+-------------+------------+-------+------------+
-|                                                            sentence                                                           |     subj    | sent_score | topic | sim_score  |
-+-------------------------------------------------------------------------------------------------------------------------------+-------------+------------+-------+------------+
-|      market Great with variety wide of spices , oils olives , cheeses , olives , and foods other Meditteranean         .      |    market   |   0.125    |  PRCE | 0.6004061  |
-|              with variety wide of spices , oils olives , cheeses , olives , and foods other Meditteranean                     |   variety   |   0.125    |  ATMS | 0.52207565 |
-|                        of spices , oils olives , cheeses , olives , and foods other Meditteranean                             |    spices   |     0      |  FOOD | 0.62157047 |
-|                          spices , oils olives , cheeses , olives , and foods other Meditteranean                              |     oils    |     0      |  FOOD | 0.5693232  |
-|                               oils olives , cheeses , olives , and foods other Meditteranean                                  |   cheeses   |     0      |  FOOD | 0.5203108  |
-|                                      cheeses , olives , and foods other Meditteranean                                         |    olives   |     0      |  FOOD | 0.5408079  |
-|                                            olives , and foods other Meditteranean                                             |    foods    |     0      |  FOOD | 0.5693232  |
-|                                                  are prices The  excellent .                                                  |    prices   |     0      |  FOOD | 0.7766485  |
-|                                          is owner The  friendly very and helpful  .                                           |    owner    |    0.5     |  PRCE | 0.6095858  |
-| is It always pleasure a shop to there ,   chat with him  , and get advice about ingredients for recipes  making I 'm       .  |   pleasure  |    0.25    |  SERV | 0.6207362  |
-|                                                           with him                                                            |     him     |     0      |  FOOD | 0.46400025 |
-|                                   get advice about ingredients for recipes  making I 'm                                       |    advice   |    0.0     |  SERV | 0.5429905  |
-|                                         about ingredients for recipes  making I 'm                                            | ingredients |    0.0     |  SERV | 0.4880192  |
-|                                                          for recipes                                                          |   recipes   |     0      |  FOOD | 0.67873025 |
-+-------------------------------------------------------------------------------------------------------------------------------+-------------+------------+-------+------------+
-###########################################################
-review:: Always trust a Chef's restaurant.   I've always loved Guy Fiery on the food channels, so why not try his restaurant?!   I ordered the Bacon Mac and Cheese Burger which is a huge hit at their restaurant. It was AMAZING! It was delicious! While on vacation, I don't believe in healthy eats, so I don't know why my boyfriend ordered a Caesar Salad. Well, after tasting in.. it was SUPER GOOD! It was full of flavor and their croutons was a big piece of crouton.   Their service was good as well being that it was pretty busy. My friends decided to eat here before leaving Vegas the next day and they loved it!!  I will definitely be eating here again when in Vegas.
-###########################################################
-FOOD (3.775)  ATMS (0.0)  SERV (-0.3500000000000001)  PRCE (0) 
-+-----------------------------------------------------------------------------------------------+------------+----------------------+-------+------------+
-|                                            sentence                                           |    subj    |      sent_score      | topic | sim_score  |
-+-----------------------------------------------------------------------------------------------+------------+----------------------+-------+------------+
-|                            trust Always restaurant Chef a 's   .                             | restaurant |         0.0          |  FOOD | 0.71853495 |
-|                                                                                              |            |                      |       |            |
-|                                                                                               |            |                      |       |            |
-|  loved I 've always Fiery Guy on channels the food    , so try why not restaurant his  ?  !  |   Fiery    |         0.5          |  FOOD | 0.71853495 |
-|                                                                                              |            |                      |       |            |
-|                                                                                               |            |                      |       |            |
-|                                     on channels the food                                      |  channels  |          0           |  FOOD | 0.71853495 |
-|                                 try why not restaurant his  ?                                 | restaurant |         0.0          |  ATMS | 0.3366184  |
-|   ordered I Burger the Mac Bacon and Cheese  is which hit a huge at restaurant their      .   |   Burger   | -0.2250000000000001  |  SERV | 0.43464866 |
-|                          is which hit a huge at restaurant their                              |    hit     | -0.10000000000000009 |  FOOD | 0.71853495 |
-|                                     at restaurant their                                       | restaurant |          0           |  FOOD | 0.71853495 |
-|                                       on While vacation                                       |  vacation  |          0           |  FOOD | 0.71853495 |
-|                                       in eats healthy                                         |    eats    |         1.0          |  FOOD | 0.5198405  |
-|                           ordered why boyfriend my  Salad a Caesar                            | boyfriend  |        -0.125        |  SERV | 0.5208735  |
-|                           ordered why boyfriend my  Salad a Caesar                            |   Salad    |        -0.125        |  FOOD | 0.71853495 |
-|                                           of flavor                                           |   flavor   |          0           |  FOOD | 0.71853495 |
-|                        was croutons their  piece a big of crouton   .                        |  croutons  |          0           |  FOOD | 0.71853495 |
-|                                                                                              |            |                      |       |            |
-|                                                                                               |            |                      |       |            |
-|                        was croutons their  piece a big of crouton   .                        |   piece    |          0           |  ATMS | 0.5621339  |
-|                                                                                              |            |                      |       |            |
-|                                                                                               |            |                      |       |            |
-|                                          of crouton                                           |  crouton   |          0           |  FOOD |  0.703834  |
-|              was service Their  good being well as  was that it busy pretty    .              |  service   |         1.75         |  FOOD | 0.4853471  |
-| decided friends My  eat to here before leaving Vegas day the next     and loved they it ! !  |  friends   |         0.75         |  FOOD | 0.56792325 |
-|                                                                                              |            |                      |       |            |
-|                                                                                               |            |                      |       |            |
-|                                  leaving Vegas day the next                                   |   Vegas    |         0.0          |  FOOD | 0.5296798  |
-|                                         in when Vegas                                         |   Vegas    |          0           |  FOOD | 0.58313555 |
-+-----------------------------------------------------------------------------------------------+------------+----------------------+-------+------------+
