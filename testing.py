@@ -83,35 +83,58 @@ def accuracy_one(x_summary,y_summary):
   y_vec = np.array([tup[1] for tup in y_summary]).reshape(1,4)
 
   dist = euclidean_distances(x_vec, y_vec)
+  print("dist: distance")
   norm_dist = dist/4.0    # max distance is 4.0
 
   return (1- norm_dist)
 
 def accuracy_metric(x_summaries, y_summaries):
-  if not len(x_summaries) == len(y_summaries):
-    print("Error: different shapes: " + len(x_summaries) + "!=" + len(y_summaries))
-    return None
+    if not len(x_summaries) == len(y_summaries):
+        print("Error: different shapes: " + len(x_summaries) + "!=" + len(y_summaries))
+        return None
 
-  accuracy = []
-  num_points = len(x_summaries)
-  for i in range(num_points):
-    accuracy.append(accuracy_one(x_summaries[i], y_summaries[i]))
+    accuracy = []
+    num_points = len(x_summaries)
+    for i in range(num_points):
+        print(x_summaries[i], y_summaries[i])
+        score = accuracy_one(x_summaries[i], y_summaries[i])
+        print("accuracy: ", score)
+        accuracy.append(score)
 
-  return sum(accuracy)/len(accuracy)
+    return sum(accuracy)/len(accuracy)
 
 
 ##
-if not len(human_scores) == len(system_scores):
-    print("Error: Data shapes are not the same. " + len(human_scores) + "!=" + len(system_scores))
+fileName = "D:\\OneDrive - California Polytechnic State University\\csc582\\yelp final project\\nltk-yelp-research\data\\human.csv"
+test_data = pd.read_csv(fileName)
+
+# Perform aspect sentiment analysis on the data set
+system_df = calculateAESO(test_data)
+
+if not len(test_data) == len(system_df):
+    print("Error: Data shapes are not the same. " + str(len(test_data)) + "!=" + str(len(system_df)))
 
 x_summaries = []
 y_summaries = []
-row_count = len(human_scores)
+row_count = len(test_data)
 for i in range(row_count):
-    x_row = system_scores.iloc[i]
-    y_row = human_scores.iloc[i]
-    x_summaries.append([('FOOD', norm(x_row['food_score'])), ('ATMS', norm(x_row['atms_score'])), ('SERV', norm(x_row['serv_score'])), ('PRCE', norm(x_row['prce_score']))])
-    y_summaries.append([('FOOD', norm(y_row['food_score'])), ('ATMS', norm(y_row['atms_score'])), ('SERV', norm(y_row['serv_score'])), ('PRCE', norm(y_row['prce_score']))])
+    x_row = test_data.iloc[i]
+    y_row = system_df.iloc[i]
+    x_summaries.append([('FOOD', norm(float(x_row['food_score']))), ('ATMS', norm(float(x_row['atms_score']))), ('SERV', norm(float(x_row['serv_score']))), ('PRCE', norm(float(x_row['prce_score'])))])
+    y_summaries.append([('FOOD', norm(float(y_row['food_score']))), ('ATMS', norm(float(y_row['atms_score']))), ('SERV', norm(float(y_row['serv_score']))), ('PRCE', norm(float(y_row['prce_score'])))])
 
 score = accuracy_metric(x_summaries, y_summaries)
+print(score)
+
+
+##
+aa = [('FOOD', 1), ('ATMS', 0), ('SERV', 1), ('PRCE', 0)]
+bb = [('FOOD', 1), ('ATMS', 1), ('SERV', 0), ('PRCE', 0)]
+cc = [('FOOD', 1), ('ATMS', 1), ('SERV', 0), ('PRCE', 0)]
+dd = [('FOOD', 1), ('ATMS', 0), ('SERV', 0), ('PRCE', 0)]
+
+x = [aa, bb, cc]
+y = [cc, bb, dd]
+
+score = accuracy_metric(x, y)
 print(score)

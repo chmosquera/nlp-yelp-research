@@ -1,0 +1,19 @@
+Example
+---------
+Tried this place for the first time,
+The environment is fun, bright and the IPod charging station and wi-fi are the only thing I would come back for.
+I ordered the BBQ chicken salad, it was all lettuce and literally a teaspoon (NOT tablespoon) of chicken pieces.  The toppings were incredibly small.  $8.00 for a bowl of lettuce isn't going to impress anyone.
+I wanted to try the pesto chicken panini, but they only offer white bread, no other healthy or gluten free options.
+I was excited to try this place but walked out VERY disappointed.  Won't be back or recommend to anyone until they get real!!
+---------
+food = 1
+atms = 1
+serv = 0
+price = 1
+
+food_score = -1
+atms_score = 1
+serv_score = 0
+prce_score = -1
+
+

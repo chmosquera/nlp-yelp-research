@@ -8,6 +8,7 @@ from prettytable import PrettyTable
 from pprint import pprint
 from sense2vec import Sense2VecComponent
 
+
 # Resources for determining similarity: Spacy, sense2vec
 s2v_path = "D:\\Programs\\Python37x64\\nlp_config\\s2v_reddit_2015_md"
 spacy_lg_path = 'D:\\Programs\\Python37x64\\nlp_config\\venv\\Lib\\site-packages\\en_core_web_lg\\en_core_web_lg-2.2.5'
@@ -138,18 +139,54 @@ def wsdLesk(sentence, word, tree_pos=None, debug=False):
 ######################################################################
 #   Sentiment
 ######################################################################
+BING_NEG_WORDS = []
+BING_POS_WORDS = []
 
-def calculateSentiment(pos, neg, objv):
-    # objectivity threshold
-    if objv > 0.625:
+
+def loadSentimentLexicons():
+    global BING_NEG_WORDS, BING_POS_WORDS
+    f = open(
+        'data\\opinion-lexicon-English\\negative-words.txt',
+        'r')
+    lines = f.readlines()
+    BING_NEG_WORDS = [line.replace('\n', "") for line in lines if not line[0] == ';']
+    f.close()
+
+    f = open(
+        'data\\opinion-lexicon-English\\positive-words.txt',
+        'r')
+    lines = f.readlines()
+    BING_POS_WORDS = [line.replace('\n', "") for line in lines if not line[0] == ';']
+    f.close()
+
+
+def calculate_sentiment(syn_name, use_bing=True):
+    global BING_NEG_WORDS, BING_POS_WORDS
+
+    senti_syn = sentiwordnet.senti_synset(syn_name)
+    pos, neg, obj, name = senti_syn.pos_score(), senti_syn.neg_score(), senti_syn.obj_score(), \
+                          senti_syn.synset.lemmas()[0].name()
+    # print(pos,neg,obj,name)
+    if use_bing:  # use Bing's lexicon
+        if name in BING_NEG_WORDS:
+            if neg == 0:
+                neg = - (1.1 - obj)
+            return neg
+        elif name in BING_POS_WORDS:
+            if pos == 0:
+                pos = (1.1 - obj)
+            return pos
+    if obj > 0.8:  # objectivity threshold
+        print("pruned: ", name, obj)
         return 0.0
     return pos - neg
+
 
 # TODO not getting good sentiment scores
 def sentiWordNet(sentence, debug=True):
     # Used for debugging
     LOGDATA = []
-    T_SENTI = PrettyTable(['word', 'tag', 'def', '+', '-', 'objv'])
+    T_SENTI = PrettyTable(['word', 'tag', '+', '-', 'objv', 'score', 'def'])
 
     # begin
     total_sentiment = 0
@@ -158,33 +195,38 @@ def sentiWordNet(sentence, debug=True):
     filtered_spacy_tokens = [tok for tok in doc if not tok.text in stopwords.words('english') and tok.text.isalnum()]
     tagged = [(tok.text, tok.tag_) for tok in filtered_spacy_tokens]
     tokens = [tok for tok, tag in tagged]
+    print(tokens)
 
+    # myLesk = Lesk(sentence)
     if debug:
         print(tagged)
         LOGDATA.append(tagged)
 
     for tok, tag in tagged:
         wntag = getWordnetPOS(tag)
+        # prune - only keep adj, adv, verb
+        if wntag not in [wordnet.ADJ, wordnet.ADV, wordnet.VERB]:
+            continue
 
-        syn = wsdLesk(sentence, tok, tag)
-        defn, pos, neg, objv = None, None, None, None
-        if syn:
+        # lesk_result = myLesk.lesk(tok, sentence)
+        lesk_result = lesk(sentence, tok, wntag)
+        if lesk_result:
+            # syn = wn.synset(lesk_result)
+            syn = lesk_result
             syn_sent = sentiwordnet.senti_synset(syn.name())
-            defn = syn.definition()
-            pos = syn_sent.pos_score()
-            neg = syn_sent.neg_score()
-            objv = syn_sent.obj_score()
-
-            total_sentiment += calculateSentiment(pos, neg, objv)
-
-        T_SENTI.add_row([tok, tag, defn, pos, neg, objv])
-        LOGDATA.append([tok, tag, defn, pos, neg, objv])
-
+            score = calculate_sentiment(syn.name())
+            total_sentiment += score
+            T_SENTI.add_row(
+                [tok, tag, syn_sent.pos_score(), syn_sent.neg_score(), syn_sent.obj_score(), score, syn.definition()])
+            LOGDATA.append(
+                [tok, tag, syn_sent.pos_score(), syn_sent.neg_score(), syn_sent.obj_score(), score, syn.definition()])
+        else:
+            T_SENTI.add_row([tok, tag, None, None, None, None, None])
+            LOGDATA.append([tok, tag, None, None, None, None, None])
     if debug:
         print(T_SENTI)
 
     return total_sentiment
-
 
 # Unresolved coreferencing issue
 # In the meantime, don't include these stop nouns
@@ -325,17 +367,16 @@ def summarizeResults(topics_sentiments, categories=["FOOD","ATMS","SERV","PRCE"]
         print("Error Mismatch: Assigned topics don't match given categories. Extra topics include: ", list(scores)[len(categories):])
         return "Error: no summary given"
 
-    return [(topic,score) for topic,score in scores.items()]
+    return [(str(topic),str(score)) for topic,score in scores.items()]
     # return ",".join([topic + " (" + str(score) + ")" for topic,score in scores.items()])
 
 #########################
 # Example of pipeline
 #########################
-def calculateAESO_one():
-    _df = loadData()
-
+def calculateAESO_one(ex=None):
     # Get a random (review_id, text)
-    ex = randReview()
+    if not ex:
+        ex = randReview()
 
     LOGDATA = []
     LOGDATA.append("###########################################################")
@@ -360,22 +401,21 @@ def calculateAESO_one():
         TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
 
     summary = summarizeResults(summary_tup)
-    LOGDATA.append(topic + " (" + score + ") " for topic,score in summary)
+    LOGDATA.append(" ".join([topic + " (" + score + ") " for topic,score in summary]))
     LOGDATA.append(TT.get_string())
 
     # save file
+    print(LOGDATA)
     save = open("complete_analysis.txt", 'a+')
     save.writelines('\n'.join(LOGDATA) + '\n')
     save.close()
 
-
-def calculateAESO():
+##
+def calculateAESO(data):
     # Prepare dataframe to save data
     df = {'review_id': [], 'text': [], 'food_score': [], 'atms_score': [], 'serv_score': [], 'prce_score': []}
 
-    human_scores = loadData()
-
-    for idx, row in human_scores.iterrows():
+    for idx, row in data.iterrows():
         ex = (row['review_id'], row['text'])
         df['text'].append(row['text'])
         df['review_id'].append(row['review_id'])
@@ -383,12 +423,6 @@ def calculateAESO():
         # ########################
         # Example of pipeline
         # ########################
-        LOGDATA = []
-        LOGDATA.append("###########################################################")
-        LOGDATA.append("review:: " + condenseReview(ex[1]))
-        LOGDATA.append("###########################################################")
-        TT = PrettyTable(["sentence", "subj", "sent_score", "topic", "sim_score"])
-
         nouns_sentiments = aspectSentimentCalculation(ex[1])
         nouns = [s for s, senti, sentence in nouns_sentiments]
         assigned_topics = yelpSimilarities(ex[1], nouns)
@@ -404,7 +438,6 @@ def calculateAESO():
             # add row: phrase, subject, sentiment, assigned topic, similarity score
             subj_topic_sentiment.append((ns[2], ns[0], ns[1], at[1][0], at[1][1]))
             summary_tup.append((at[1][0], ns[1]))
-            TT.add_row([ns[2], ns[0], ns[1], at[1][0], at[1][1]])
 
         summary = summarizeResults(summary_tup)
 
@@ -413,14 +446,19 @@ def calculateAESO():
         df['serv_score'].append(summary[2][1])
         df['prce_score'].append(summary[3][1])
 
-        # LOGDATA.append(topic + " (" + score + ") " for topic,score in summary)
-        # LOGDATA.append(TT.get_string())
-
-        # # save file
-        # save = open("complete_analysis.txt", 'a+')
-        # save.writelines('\n'.join(LOGDATA) + '\n')
-        # save.close()
-
     # Save to csv
+    save_file = 'D:\\OneDrive - California Polytechnic State University\\csc582\\yelp final project\\nltk-yelp-research\data\\results.csv'
     system_scores = pd.DataFrame(df)
-    system_scores.to_csv('D:\\OneDrive - California Polytechnic State University\\csc582\\yelp final project\\nltk-yelp-research\data\\results.csv')
+    system_scores.to_csv(save_file)
+    print("Data saved to file: " + save_file)
+    return system_scores
+
+
+##
+loadData()
+loadSentimentLexicons()
+#
+
+##
+ex = randReview()
+calculateAESO_one(ex)
