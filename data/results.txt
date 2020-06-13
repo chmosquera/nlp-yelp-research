@@ -6,3 +6,7 @@ sentiment_analysis_lesk_bing: [[0.91331209]]
 sentiment_analysis_vs_socalc: [[0.91750919]]
 topic_sentiment: [[0.69290792]]
 
+sentiment_analysis: [[0.90705349]]
+sentiment_analysis_lesk: [[0.90641904]]
+sentiment_analysis_lesk_bing: [[0.9122942]]
+sentiment_analysis_vs_socalc: [[0.91750919]]
